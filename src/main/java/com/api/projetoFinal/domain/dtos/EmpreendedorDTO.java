@@ -1,16 +1,16 @@
 package com.api.projetoFinal.domain.dtos;
-import com.api.projetoFinal.domain.Consumidor;
+import com.api.projetoFinal.domain.Empreendedor;
 import javax.validation.constraints.NotNull;
 
-public class ConsumidorDTO extends Consumidor {
+public class EmpreendedorDTO extends Empreendedor {
 
     private static final long serialVersionUID = 1L;
 
-    protected Integer idConsumidor;
-    @NotNull(message = "O campo NOME não poderá ser nulo")
-    protected String nome;
-    @NotNull(message = "O CPF não poderá ser nulo")
-    protected String cpf;
+    protected Integer idEmpreendedor;
+    @NotNull(message = "O campo Nome do negócio não poderá ser nulo")
+    protected String nomeNegocio;
+    @NotNull(message = "O CNPJ não poderá ser nulo")
+    protected String cnpj;
     @NotNull(message = "O E-MAIL não poderá ser nulo")
     protected String email;
     @NotNull(message = "O campo de SENHA não pode ser nulo")
@@ -24,15 +24,15 @@ public class ConsumidorDTO extends Consumidor {
     protected String numero;
 
 
-    public ConsumidorDTO() {
+    public EmpreendedorDTO() {
         super();
     }
 
-    public ConsumidorDTO(Consumidor obj) {
+    public EmpreendedorDTO(Empreendedor obj) {
         super();
-        this.idConsumidor = obj.getIdConsumidor();
-        this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
+        this.idEmpreendedor = obj.getIdEmpreendedor();
+        this.nomeNegocio = obj.getNomeNegocio();
+        this.cnpj = obj.getCnpj();
         this.email = obj.getEmail();
         this.password = obj.getPassword();
         this.celular = obj.getCelular();
@@ -93,32 +93,32 @@ public class ConsumidorDTO extends Consumidor {
         this.numero = numero;
     }
 
-    public Integer getIdConsumidor() {
-        return idConsumidor;
+    public Integer getIdEmpreendedor() {
+        return idEmpreendedor;
     }
 
-    public void setIdConsumidor(Integer idConsumidor) {
-        this.idConsumidor = idConsumidor;
-    }
-
-
-    public String getNome() {
-        return nome;
+    public void setIdEmpreendedor(Integer idEmpreendedor) {
+        this.idEmpreendedor = idEmpreendedor;
     }
 
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNomeNegocio() {
+        return nomeNegocio;
     }
 
 
-    public String getCpf() {
-        return cpf;
+    public void setNomeNegocio(String nomeNegocio) {
+        this.nomeNegocio = nomeNegocio;
     }
 
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public String getcnpj() {
+        return cnpj;
+    }
+
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
 

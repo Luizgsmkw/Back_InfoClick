@@ -7,11 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.api.projetoFinal.domain.Admin;
 import com.api.projetoFinal.domain.Consumidor;
+import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.Empreendedor;
+import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.repositories.AdminRepository;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import com.api.projetoFinal.repositories.EmpreendedorRepository;
+import com.api.projetoFinal.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
@@ -24,6 +27,9 @@ public class DBService {
 
 	@Autowired
 	private AdminRepository adminRepository;
+	
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
 	public void instanciaDB() {
 		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", "1234", "21992934144",
@@ -39,12 +45,19 @@ public class DBService {
 		Empreendedor e3 = new Empreendedor(null, "Loja 2", "57.050.027/0001-06", "loja3@gmail.com", "123456",
 				"21992934155", Ramo.AMBOS, "22720400", "Rio de Janeiro", "Rio de Janeiro", "Taquara", "maraville",
 				"1155");
+		
+		
+		
+		Produto p1 = new Produto(null, "Alexandre", "Alexandre", "Alexandre", Categoria.HARDWARE, 1001, false, "naotem", 1, null, null);
+		
 
 		Admin a1 = new Admin(null, "Palloma Gulliver", "gulliver.palloma@gmail.com", "p1234");
 
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));
 		adminRepository.saveAll(Arrays.asList(a1));
+		produtoRepository.saveAll(Arrays.asList(p1));
+		
 
 	}
 }

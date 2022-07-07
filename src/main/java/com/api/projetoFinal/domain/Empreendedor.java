@@ -2,6 +2,7 @@ package com.api.projetoFinal.domain;
 
 import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
+import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -23,6 +24,7 @@ public class Empreendedor implements Serializable {
     @Column(unique = true)
     private String email;
     private String password;
+    private Perfil perfil;
     private String celular;
     private Ramo ramo;
     private String cep;
@@ -39,6 +41,7 @@ public class Empreendedor implements Serializable {
         this.cnpj = obj.getCnpj();
         this.email = obj.getEmail();
         this.password = obj.getPassword();
+        this.perfil = obj.getPerfil();
         this.celular = obj.getCelular();
         this.ramo = obj.getRamo();
         this.cep = obj.getCep();
@@ -65,10 +68,21 @@ public class Empreendedor implements Serializable {
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;
+        setPerfil(Perfil.EMPREENDEDOR);
+
     }
 
     public Empreendedor() {
         super();
+        setPerfil(Perfil.EMPREENDEDOR);
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public Ramo getRamo() {

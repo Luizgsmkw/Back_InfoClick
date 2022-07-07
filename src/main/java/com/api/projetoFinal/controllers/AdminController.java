@@ -1,0 +1,29 @@
+package com.api.projetoFinal.controllers;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.api.projetoFinal.domain.Admin;
+import com.api.projetoFinal.domain.dtos.AdminDTO;
+import com.api.projetoFinal.services.AdminService;
+
+@RestController
+@RequestMapping(value = "/service/admin")
+public class AdminController {
+
+	@Autowired
+	private AdminService service;
+
+	@GetMapping
+	public ResponseEntity<List<AdminDTO>> findAllAdmin() {
+		List<Admin> list = service.findAllAdmin();
+		List<AdminDTO> listDto = list.stream().map(adm -> new AdminDTO(adm)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+}

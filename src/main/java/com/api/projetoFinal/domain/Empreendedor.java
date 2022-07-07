@@ -2,6 +2,7 @@ package com.api.projetoFinal.domain;
 
 import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
+import com.api.projetoFinal.domain.enums.Ramo;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Empreendedor implements Serializable {
     private String email;
     private String password;
     private String celular;
+    private Ramo ramo;
     private String cep;
     private String estado;
     private String cidade;
@@ -38,6 +40,7 @@ public class Empreendedor implements Serializable {
         this.email = obj.getEmail();
         this.password = obj.getPassword();
         this.celular = obj.getCelular();
+        this.ramo = obj.getRamo();
         this.cep = obj.getCep();
         this.estado = obj.getEstado();
         this.cidade = obj.getCidade();
@@ -47,7 +50,7 @@ public class Empreendedor implements Serializable {
     }
 
     public Empreendedor(Integer idEmpreendedor, String nomeNegocio, @CNPJ String cnpj, String email, String password,
-            String celular, String cep, String estado, String cidade, String bairro, String rua,
+            String celular, Ramo ramo, String cep, String estado, String cidade, String bairro, String rua,
             String numero) {
         this.idEmpreendedor = idEmpreendedor;
         this.nomeNegocio = nomeNegocio;
@@ -55,6 +58,7 @@ public class Empreendedor implements Serializable {
         this.email = email;
         this.password = password;
         this.celular = celular;
+        this.ramo = ramo;
         this.cep = cep;
         this.estado = estado;
         this.cidade = cidade;
@@ -67,10 +71,12 @@ public class Empreendedor implements Serializable {
         super();
     }
 
-    
+    public Ramo getRamo() {
+        return ramo;
+    }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
+    public void setRamo(Ramo ramo) {
+        this.ramo = ramo;
     }
 
     public Integer getIdEmpreendedor() {

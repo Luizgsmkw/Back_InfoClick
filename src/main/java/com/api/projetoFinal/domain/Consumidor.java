@@ -1,177 +1,196 @@
 package com.api.projetoFinal.domain;
 
-import com.api.projetoFinal.domain.dtos.ConsumidorDTO;
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.api.projetoFinal.domain.dtos.ConsumidorDTO;
+import com.api.projetoFinal.domain.enums.Perfil;
 
 @Entity
 public class Consumidor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idConsumidor;
-    private String nome;
-    @CPF
-    @Column(unique = true)
-    private String cpf;
-    @Column(unique = true)
-    private String email;
-    private String password;
-    private String celular;
-    private String cep;
-    private String estado;
-    private String cidade;
-    private String bairro;
-    private String rua;
-    private String numero;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idConsumidor;
+	private String nome;
+	@CPF
+	@Column(unique = true)
+	private String cpf;
+	@Column(unique = true)
+	private String email;
+	private String password;
+	private Perfil perfil;
+	private String celular;
+	private String cep;
+	private String estado;
+	private String cidade;
+	private String bairro;
+	private String rua;
+	private String numero;
 
-    public Consumidor(ConsumidorDTO obj){
-        super();
-        this.idConsumidor = obj.getIdConsumidor();
-        this.nome = obj.getNome();
-        this.cpf = obj.getCpf();
-        this.email = obj.getEmail();
-        this.password = obj.getPassword();
-        this.celular = obj.getCelular();
-        this.cep = obj.getCep();
-        this.estado = obj.getEstado();
-        this.cidade = obj.getCidade();
-        this.bairro = obj.getBairro();
-        this.rua = obj.getRua();
-        this.numero = obj.getNumero();
-    }
+	public Consumidor(ConsumidorDTO obj) {
+		super();
+		this.idConsumidor = obj.getIdConsumidor();
+		this.nome = obj.getNome();
+		this.cpf = obj.getCpf();
+		this.email = obj.getEmail();
+		this.password = obj.getPassword();
+		this.perfil = obj.getPerfil();
+		this.celular = obj.getCelular();
+		this.cep = obj.getCep();
+		this.estado = obj.getEstado();
+		this.cidade = obj.getCidade();
+		this.bairro = obj.getBairro();
+		this.rua = obj.getRua();
+		this.numero = obj.getNumero();
+	}
 
-    public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, String celular, String cep, String estado, String cidade, String bairro, String rua, String numero) {
-        this.idConsumidor = idConsumidor;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.password = password;
-        this.celular = celular;
-        this.cep = cep;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.rua = rua;
-        this.numero = numero;
-    }
+	public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, Perfil perfil,
+			String celular, String cep, String estado, String cidade, String bairro, String rua, String numero) {
+		this.idConsumidor = idConsumidor;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.password = password;
+		this.perfil = perfil;
+		this.celular = celular;
+		this.cep = cep;
+		this.estado = estado;
+		this.cidade = cidade;
+		this.bairro = bairro;
+		this.rua = rua;
+		this.numero = numero;
+	}
 
-    public Consumidor() {
-        super();
-    }
+	public Consumidor() {
+		super();
+	}
 
-    public Integer getIdConsumidor() {
-        return idConsumidor;
-    }
+	public Perfil getPerfil() {
+		return perfil;
+	}
 
-    public void setIdConsumidor(Integer idConsumidor) {
-        this.idConsumidor = idConsumidor;
-    }
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public Integer getIdConsumidor() {
+		return idConsumidor;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setIdConsumidor(Integer idConsumidor) {
+		this.idConsumidor = idConsumidor;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getCelular() {
-        return celular;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public String getCelular() {
+		return celular;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
 
-    public String getEstado() {
-        return estado;
-    }
+	public String getCep() {
+		return cep;
+	}
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
-    public String getCidade() {
-        return cidade;
-    }
+	public String getEstado() {
+		return estado;
+	}
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    public String getBairro() {
-        return bairro;
-    }
+	public String getCidade() {
+		return cidade;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
-    public String getRua() {
-        return rua;
-    }
+	public String getBairro() {
+		return bairro;
+	}
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	public String getRua() {
+		return rua;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Consumidor that = (Consumidor) o;
-        return idConsumidor.equals(that.idConsumidor) && cpf.equals(that.cpf);
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idConsumidor, cpf);
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Consumidor that = (Consumidor) o;
+		return idConsumidor.equals(that.idConsumidor) && cpf.equals(that.cpf);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idConsumidor, cpf);
+	}
 }

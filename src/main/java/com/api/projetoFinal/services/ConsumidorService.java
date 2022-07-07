@@ -4,6 +4,7 @@ import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.dtos.ConsumidorDTO;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.api.projetoFinal.services.exceptions.ObjectNotFoundException;
 
@@ -27,6 +28,7 @@ public class ConsumidorService {
     public Consumidor create(ConsumidorDTO objDto) {
         objDto.setIdConsumidor(null);
         objDto.setPassword(objDto.getPassword());
+        validaCpf(objDto);
         Consumidor newObj = new Consumidor(objDto);
         return repository.save(newObj);
 
@@ -35,6 +37,7 @@ public class ConsumidorService {
     public Consumidor update(Integer id, ConsumidorDTO objDto) {
         objDto.setIdConsumidor(id);
         Consumidor oldObj = findById(id);
+        validaCpf(objDto);
         oldObj = new Consumidor(objDto);
         return repository.save(oldObj);
     }
@@ -43,4 +46,12 @@ public class ConsumidorService {
         Consumidor obj = findById(id);
         repository.deleteById(id);
     }
+
+    private void validaCpf(ConsumidorDTO objDto) {
+
+		Optional<Consumidor> obj = repository.findByCpf(objDto.getCpf());
+		if (obj.isPresent() && obj.get().getIdConsumidor() != objDto.getIdConsumidor()) {
+			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+		}
+	}
 }

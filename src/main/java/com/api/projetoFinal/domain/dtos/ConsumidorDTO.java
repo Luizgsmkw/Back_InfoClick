@@ -29,6 +29,7 @@ public class ConsumidorDTO extends Consumidor {
 
 	public ConsumidorDTO() {
 		super();
+		setPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public ConsumidorDTO(Consumidor obj) {
@@ -46,6 +47,15 @@ public class ConsumidorDTO extends Consumidor {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
+		setPerfil(Perfil.CONSUMIDOR);
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 	public String getCep() {
@@ -144,11 +154,4 @@ public class ConsumidorDTO extends Consumidor {
 		this.celular = celular;
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-	}
 }

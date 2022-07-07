@@ -3,12 +3,9 @@ package com.api.projetoFinal.domain;
 import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

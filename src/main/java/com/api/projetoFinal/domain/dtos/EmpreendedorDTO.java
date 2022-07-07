@@ -1,5 +1,7 @@
 package com.api.projetoFinal.domain.dtos;
 import com.api.projetoFinal.domain.Empreendedor;
+import com.api.projetoFinal.domain.enums.Ramo;
+
 import javax.validation.constraints.NotNull;
 
 public class EmpreendedorDTO extends Empreendedor {
@@ -16,6 +18,8 @@ public class EmpreendedorDTO extends Empreendedor {
     @NotNull(message = "O campo de SENHA não pode ser nulo")
     protected String password;
     protected String celular;
+    @NotNull(message = "O campo de RAMO não pode ser nulo")
+    protected Ramo ramo;
     protected String cep;
     protected String estado;
     protected String cidade;
@@ -36,6 +40,7 @@ public class EmpreendedorDTO extends Empreendedor {
         this.email = obj.getEmail();
         this.password = obj.getPassword();
         this.celular = obj.getCelular();
+        this.ramo = obj.getRamo();
         this.cep = obj.getCep();
         this.estado = obj.getEstado();
         this.cidade = obj.getCidade();
@@ -112,7 +117,7 @@ public class EmpreendedorDTO extends Empreendedor {
     }
 
 
-    public String getcnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
@@ -147,5 +152,13 @@ public class EmpreendedorDTO extends Empreendedor {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public Ramo getRamo() {
+        return ramo;
+    }
+
+    public void setRamo(Ramo ramo) {
+        this.ramo = ramo;
     }
 }

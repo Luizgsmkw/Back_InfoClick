@@ -51,7 +51,7 @@ public class EmpreendedorService {
 	}
 	
 	private void validaPorCnpj(EmpreendedorDTO objDTO) {
-		Optional<Empreendedor> obj = this.repository.findByCnpj(objDTO.getcnpj());
+		Optional<Empreendedor> obj = this.repository.findByCnpj(objDTO.getCnpj());
 		if(obj.isPresent() && obj.get().getIdEmpreendedor() != objDTO.getIdEmpreendedor()) {
 			throw new DataIntegrityViolationException("CNPJ já cadastrado no Sistema");
 		}

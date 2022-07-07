@@ -3,6 +3,8 @@ package com.api.projetoFinal.domain;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.api.projetoFinal.domain.dtos.AdminDTO;
@@ -12,6 +14,7 @@ public class Admin implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAdmin;
 	private String nome;
 	private String email;
@@ -23,6 +26,14 @@ public class Admin implements Serializable {
 		this.nome = obj.getnome();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
+	}
+
+	public Admin(Integer idAdmin, String nome, String email, String senha) {
+		super();
+		this.idAdmin = idAdmin;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	public Admin() {

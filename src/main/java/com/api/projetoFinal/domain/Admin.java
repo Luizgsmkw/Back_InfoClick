@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.api.projetoFinal.domain.dtos.AdminDTO;
+import com.api.projetoFinal.domain.enums.Perfil;
 
 @Entity
 public class Admin implements Serializable {
@@ -19,13 +20,15 @@ public class Admin implements Serializable {
 	private String nome;
 	private String email;
 	private String senha;
+	private Perfil perfil;
 
 	public Admin(AdminDTO obj) {
 		super();
 		this.idAdmin = obj.getIdAdmin();
-		this.nome = obj.getnome();
+		this.nome = obj.getNome();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
+		this.perfil = obj.getPerfil();
 	}
 
 	public Admin(Integer idAdmin, String nome, String email, String senha) {
@@ -34,10 +37,20 @@ public class Admin implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		setPerfil(Perfil.ADMIN);
 	}
 
 	public Admin() {
 		super();
+		setPerfil(Perfil.ADMIN);
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 	public Integer getIdAdmin() {
@@ -48,10 +61,10 @@ public class Admin implements Serializable {
 		this.idAdmin = idAdmin;
 	}
 
-	public String getnome() {
+	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

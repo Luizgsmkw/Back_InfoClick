@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ConsumidorRepository extends JpaRepository<Consumidor, Integer> {
 
      Optional<Consumidor> findByCpf(String cpf);
+
+     Optional<Consumidor> findByEmail(String email);
 }

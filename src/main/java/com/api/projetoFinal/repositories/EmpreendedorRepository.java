@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmpreendedorRepository extends JpaRepository<Empreendedor, Integer> {
 	
 	Optional<Empreendedor> findByCnpj(String cnpj);
+    Optional<Empreendedor> findByEmail(String cnpj);
 }

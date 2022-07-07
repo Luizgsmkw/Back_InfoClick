@@ -29,6 +29,7 @@ public class ConsumidorService {
         objDto.setIdConsumidor(null);
         objDto.setPassword(objDto.getPassword());
         validaCpf(objDto);
+        validaEmail(objDto);
         Consumidor newObj = new Consumidor(objDto);
         return repository.save(newObj);
 
@@ -38,6 +39,7 @@ public class ConsumidorService {
         objDto.setIdConsumidor(id);
         Consumidor oldObj = findById(id);
         validaCpf(objDto);
+        validaEmail(objDto);
         oldObj = new Consumidor(objDto);
         return repository.save(oldObj);
     }
@@ -54,4 +56,12 @@ public class ConsumidorService {
 			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
 		}
 	}
+
+    private void validaEmail(ConsumidorDTO objDto){
+        Optional<Consumidor> obj = repository.findByEmail(objDto.getEmail());
+		if (obj.isPresent() && obj.get().getIdConsumidor() != objDto.getIdConsumidor()) {
+			throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
+		}
+        
+    }
 }

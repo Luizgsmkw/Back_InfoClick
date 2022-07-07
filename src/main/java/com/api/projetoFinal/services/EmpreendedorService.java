@@ -28,8 +28,9 @@ public class EmpreendedorService {
 
 	public Empreendedor create(EmpreendedorDTO objDTO) {
 		objDTO.setIdEmpreendedor(null);
-		objDTO.setPassword(objDTO.getPassword() );
+		objDTO.setPassword(objDTO.getPassword());
 		validaPorCnpj(objDTO);
+		validaEmail(objDTO);
 		Empreendedor newObj = new Empreendedor(objDTO);
 		return repository.save(newObj);		
 	}
@@ -38,6 +39,7 @@ public class EmpreendedorService {
 		objDto.setIdEmpreendedor(id);
         Empreendedor oldObj = findById(id);
         validaPorCnpj(objDto);
+		validaEmail(objDto);
         oldObj = new Empreendedor(objDto);
         return repository.save(oldObj);
     }
@@ -55,5 +57,11 @@ public class EmpreendedorService {
 		}
 	}
 
+	private void validaEmail(EmpreendedorDTO objDTO) {
+		Optional<Empreendedor> obj =repository.findByEmail(objDTO.getEmail());
+		if(obj.isPresent() && obj.get().getIdEmpreendedor() != objDTO.getIdEmpreendedor()) {
+			throw new DataIntegrityViolationException("CNPJ já cadastrado no Sistema");
+		}
+	}
 	
 }

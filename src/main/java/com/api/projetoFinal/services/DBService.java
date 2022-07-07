@@ -2,14 +2,13 @@ package com.api.projetoFinal.services;
 
 import java.util.Arrays;
 
-import com.api.projetoFinal.domain.enums.Perfil;
-import com.api.projetoFinal.domain.enums.Ramo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.projetoFinal.domain.Admin;
 import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.Empreendedor;
+import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.repositories.AdminRepository;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import com.api.projetoFinal.repositories.EmpreendedorRepository;
@@ -27,11 +26,10 @@ public class DBService {
 	private AdminRepository adminRepository;
 
 	public void instanciaDB() {
-		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", "1234",
-				Perfil.CONSUMIDOR, "21992934144", "2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo",
-				"31");
-		Consumidor c2 = new Consumidor(null, "Mingau", "382.670.620-09", "mingau@gmail.com", "1234", Perfil.CONSUMIDOR,
-				"10881823033", "2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31");
+		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", "1234", "21992934144",
+				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31");
+		Consumidor c2 = new Consumidor(null, "Mingau", "382.670.620-09", "mingau@gmail.com", "1234", "10881823033",
+				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31");
 
 		Empreendedor e1 = new Empreendedor(null, "Loja 1", "73.900.564/0001-54", "loja1@gmail.com", "123456",
 				"21988887777", Ramo.HARDWARE, "22720400", "Rio de Janeiro", "Rio de Janeiro", "Taquara", "maraville",

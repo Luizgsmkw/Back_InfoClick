@@ -54,14 +54,13 @@ public class Consumidor implements Serializable {
 		this.numero = obj.getNumero();
 	}
 
-	public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, Perfil perfil,
-			String celular, String cep, String estado, String cidade, String bairro, String rua, String numero) {
+	public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, String celular,
+			String cep, String estado, String cidade, String bairro, String rua, String numero) {
 		this.idConsumidor = idConsumidor;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.password = password;
-		this.perfil = perfil;
 		this.celular = celular;
 		this.cep = cep;
 		this.estado = estado;
@@ -69,10 +68,12 @@ public class Consumidor implements Serializable {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
+		setPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Consumidor() {
 		super();
+		setPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Perfil getPerfil() {

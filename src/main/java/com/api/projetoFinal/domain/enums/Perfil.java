@@ -1,7 +1,7 @@
 package com.api.projetoFinal.domain.enums;
 
 public enum Perfil {
-	ADMIN(0, "ROLE_ADMIN"), EMPREENDEDOR(1, "ROLE_CLIENTE"), CONSUMIDOR(2, "ROLE_TECNICO");
+	ADMIN(0, "ROLE_ADMIN"), EMPREENDEDOR(1, "ROLE_EMPREENDEDOR"), CONSUMIDOR(2, "ROLE_CONSUMIDOR");
 
 	private Integer codigo;
 	private String descricao;

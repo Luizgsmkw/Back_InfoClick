@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.api.projetoFinal.domain.Empreendedor;
@@ -27,6 +28,8 @@ public class EmpreendedorService {
 
 	public Empreendedor create(EmpreendedorDTO objDTO) {
 		objDTO.setIdEmpreendedor(null);
+		objDTO.setPassword(objDTO.getPassword() );
+		validaPorCnpj(objDTO);
 		Empreendedor newObj = new Empreendedor(objDTO);
 		return repository.save(newObj);		
 	}
@@ -34,6 +37,7 @@ public class EmpreendedorService {
 	public Empreendedor update(Integer id, EmpreendedorDTO objDto) {
 		objDto.setIdEmpreendedor(id);
         Empreendedor oldObj = findById(id);
+        validaPorCnpj(objDto);
         oldObj = new Empreendedor(objDto);
         return repository.save(oldObj);
     }
@@ -44,6 +48,12 @@ public class EmpreendedorService {
 		
 	}
 	
+	private void validaPorCnpj(EmpreendedorDTO objDTO) {
+		Optional<Empreendedor> obj = this.repository.findByCnpj(objDTO.getcnpj());
+		if(obj.isPresent() && obj.get().getIdEmpreendedor() != objDTO.getIdEmpreendedor()) {
+			throw new DataIntegrityViolationException("CNPJ já cadastrado no Sistema");
+		}
+	}
 
 	
 }

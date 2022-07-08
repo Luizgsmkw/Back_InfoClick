@@ -25,7 +25,7 @@ import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 import com.api.projetoFinal.services.EmpreendedorService;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:8080")
 @RequestMapping(value = "/service/empreendedores")
 public class EmpreendedorController {
 	@Autowired

@@ -2,26 +2,28 @@ package com.api.projetoFinal.domain.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
 import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
+import com.api.projetoFinal.domain.Produto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class LojaDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private Integer idLoja;	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataCriacao = LocalDate.now();
-	private String corDeFundo;
-	@NotNull(message = "O campo NOME DA LOJA não poderá ser nulo")
-	private String nomeLoja;
-	private String descricaoLoja;
-	@NotNull(message = "Um empreendedor precisa estar vinculado a Loja")
-	private Empreendedor empreendedor;
 
+	protected Integer idLoja;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	protected LocalDate dataCriacao = LocalDate.now();
+	protected String corDeFundo;
+	@NotNull(message = "O campo NOME DA LOJA não poderá ser nulo")
+	protected String nomeLoja;
+	protected String descricaoLoja;
+	@NotNull(message = "Um empreendedor precisa estar vinculado a Loja")
+	protected Empreendedor empreendedor;
+	protected List<Produto> produtos;
     public LojaDTO() {
 		super();
 	}
@@ -32,7 +34,7 @@ public class LojaDTO  implements Serializable {
 		this.corDeFundo = obj.getCorDeFundo();
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
-		this.empreendedor = obj.getEmpreendedor();
+		this.produtos = obj.getProdutos();
 	}
 
 	public Integer getIdLoja() {
@@ -82,4 +84,9 @@ public class LojaDTO  implements Serializable {
 	public void setDescricaoLoja(String descricaoLoja) {
 		this.descricaoLoja = descricaoLoja;
 	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
 }

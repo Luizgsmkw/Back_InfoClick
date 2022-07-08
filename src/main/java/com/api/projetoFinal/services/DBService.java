@@ -56,7 +56,7 @@ public class DBService {
 		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3);
 
 		Produto p1 = new Produto(null, "Alexandre", 5.0, "Alexandre", Categoria.HARDWARE, 1001, 5, "blabla", 1.0, null,
-				null);
+				null, l1);
 
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));

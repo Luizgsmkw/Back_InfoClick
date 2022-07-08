@@ -28,9 +28,9 @@ public class ConsumidorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Consumidor>> findAllConsumidor(){
+    public ResponseEntity<List<ConsumidorDTO>> findAllConsumidor(){
         List<Consumidor> list = service.findAllConsumidor();
-        List<Consumidor> listDto = list.stream()
+        List<ConsumidorDTO> listDto = list.stream()
                 .map(tec -> new ConsumidorDTO(tec)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }

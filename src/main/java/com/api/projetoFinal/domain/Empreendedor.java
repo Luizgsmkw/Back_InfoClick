@@ -57,6 +57,7 @@ public class Empreendedor implements Serializable {
         this.bairro = obj.getBairro();
         this.rua = obj.getRua();
         this.numero = obj.getNumero();
+        this.loja = obj.getLoja();
     }
 
     public Empreendedor(Integer idEmpreendedor, String nomeNegocio, @CNPJ String cnpj, String email, String password,
@@ -79,10 +80,16 @@ public class Empreendedor implements Serializable {
 
     }
 
-   
 	public Empreendedor() {
         super();
         setPerfil(Perfil.EMPREENDEDOR);
+    }
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 
     public Perfil getPerfil() {

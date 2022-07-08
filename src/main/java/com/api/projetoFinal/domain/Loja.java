@@ -23,32 +23,26 @@ private static final long serialVersionUID = 1L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idLoja;
 	
-	@JsonFormat(pattern = "dd/MM/aaaa")
+	@JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCriacao = LocalDate.now();
     private String corDeFundo;
     private String nomeLoja;
     private String descricaoLoja;
-   
     @OneToOne
     @JoinColumn(name = "empreendedor_id")
     private Empreendedor empreendedor;
-    
-   
-    
-    public Loja(LojaDTO obj) {
-    	super();
+	public Loja() {
+		super();
+	}
+
+	public Loja(LojaDTO obj) {
+		super();
 		this.idLoja = obj.getIdLoja();
 		this.corDeFundo = obj.getCorDeFundo();
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
-		this.empreendedor = obj.getEmpreendedor();			
+		this.empreendedor = obj.getEmpreendedor();
 	}
-	
-
-
-
-
-
 	public Loja(Integer idLoja, String corDeFundo, String nomeLoja, String descricaoLoja, Empreendedor empreendedor) {
 		
 		super();
@@ -57,8 +51,6 @@ private static final long serialVersionUID = 1L;
 		this.nomeLoja = nomeLoja;
 		this.descricaoLoja = descricaoLoja;
 		this.empreendedor = empreendedor;
-	
-				
 	}
 
 	@Override

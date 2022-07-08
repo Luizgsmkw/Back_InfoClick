@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
+import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,8 +20,8 @@ public class LojaDTO  implements Serializable {
 	private String nomeLoja;
 	private String descricaoLoja;
 	@NotNull(message = "Um empreendedor precisa estar vinculado a Loja")
-	private EmpreendedorDTO empreendedor;
-	
+	private Empreendedor empreendedor;
+
     public LojaDTO() {
 		super();
 	}
@@ -31,8 +32,7 @@ public class LojaDTO  implements Serializable {
 		this.corDeFundo = obj.getCorDeFundo();
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
-		this.empreendedor = new EmpreendedorDTO(obj.getEmpreendedor());
-			
+		this.empreendedor = obj.getEmpreendedor();
 	}
 
 	public Integer getIdLoja() {
@@ -41,6 +41,14 @@ public class LojaDTO  implements Serializable {
 
 	public void setIdLoja(Integer idLoja) {
 		this.idLoja = idLoja;
+	}
+
+	public Empreendedor getEmpreendedor() {
+		return empreendedor;
+	}
+
+	public void setEmpreendedor(Empreendedor empreendedor) {
+		this.empreendedor = empreendedor;
 	}
 
 	public LocalDate getDataCriacao() {
@@ -74,16 +82,4 @@ public class LojaDTO  implements Serializable {
 	public void setDescricaoLoja(String descricaoLoja) {
 		this.descricaoLoja = descricaoLoja;
 	}
-
-	public EmpreendedorDTO getEmpreendedor() {
-		return empreendedor;
-	}
-
-	public void setEmpreendedor(EmpreendedorDTO empreendedor) {
-		this.empreendedor = empreendedor;
-	}
-
-	
-
-    
 }

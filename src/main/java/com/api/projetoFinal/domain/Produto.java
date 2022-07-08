@@ -2,13 +2,9 @@ package com.api.projetoFinal.domain;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -56,6 +52,11 @@ public class Produto {
 	@UpdateTimestamp
 	private Date ultimaAtualizacao;
 
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "loja_id")
+	private Loja loja;
+
 	public Produto() {
 		super();
 	}
@@ -73,11 +74,13 @@ public class Produto {
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.dataCriacao = obj.getDataCriacao();
 		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
+		this.loja = obj.getLoja();
+
 	}
 
 	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
 			Integer produtoEstoque, Integer produtoStatus, String produtoImagem, Double produtoDesconto,
-			Date dataCriacao, Date ultimaAtualizacao) {
+			Date dataCriacao, Date ultimaAtualizacao, Loja idLoja) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -90,8 +93,20 @@ public class Produto {
 		this.produtoDesconto = produtoDesconto;
 		this.dataCriacao = dataCriacao;
 		this.ultimaAtualizacao = ultimaAtualizacao;
+		this.loja = idLoja;
+
 	}
 
+	public Integer getProdutoStatus() {
+		return produtoStatus;
+	}
+	public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
 	public Integer getId() {
 		return id;
 	}

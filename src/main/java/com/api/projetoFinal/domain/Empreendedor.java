@@ -35,9 +35,7 @@ public class Empreendedor implements Serializable {
     private String bairro;
     private String rua;
     private String numero;
-    
-       
-    @JsonIgnore
+
     @OneToOne(mappedBy = "empreendedor")
     private Loja loja;
 

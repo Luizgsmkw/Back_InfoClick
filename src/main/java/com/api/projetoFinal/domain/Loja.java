@@ -2,14 +2,11 @@ package com.api.projetoFinal.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.api.projetoFinal.domain.dtos.LojaDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,9 +25,14 @@ private static final long serialVersionUID = 1L;
     private String corDeFundo;
     private String nomeLoja;
     private String descricaoLoja;
+	@JsonIgnore
     @OneToOne
     @JoinColumn(name = "empreendedor_id")
     private Empreendedor empreendedor;
+
+
+	@OneToMany(mappedBy = "loja")
+	private List<Produto> produtos = new ArrayList<>();
 	public Loja() {
 		super();
 	}
@@ -41,7 +43,7 @@ private static final long serialVersionUID = 1L;
 		this.corDeFundo = obj.getCorDeFundo();
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
-		this.empreendedor = obj.getEmpreendedor();
+		this.produtos = obj.getProdutos();
 	}
 	public Loja(Integer idLoja, String corDeFundo, String nomeLoja, String descricaoLoja, Empreendedor empreendedor) {
 		
@@ -68,6 +70,10 @@ private static final long serialVersionUID = 1L;
 			return false;
 		Loja other = (Loja) obj;
 		return Objects.equals(idLoja, other.idLoja);
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
 
 	public Integer getIdLoja() {

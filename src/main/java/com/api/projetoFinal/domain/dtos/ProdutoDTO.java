@@ -11,20 +11,20 @@ public class ProdutoDTO extends Produto {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	protected Integer id;
 	@NotNull(message = "O campo NAME não poderá ser nulo")
-	private String name;
+	protected String name;
 	@NotNull(message = "O valor do produto não poderá ser nulo")
-	private Double produtoValor;
+	protected Double produtoValor;
 	@NotNull(message = "A descrição do produto não poderá ser nulo")
-	private String produtoDescricao;
-	private Categoria categoria;
-	private Integer produtoEstoque;
-	private Integer produtoStatus;
-	private String produtoImagem;
-	private Double produtoDesconto;
-	private Date dataCriacao;
-	private Date ultimaAtualizacao;
+	protected String produtoDescricao;
+	protected Categoria categoria;
+	protected Integer produtoEstoque;
+	protected Integer produtoStatus;
+	protected String produtoImagem;
+	protected Double produtoDesconto;
+	protected Date dataCriacao;
+	protected Date ultimaAtualizacao;
 
 	public ProdutoDTO() {
 		super();

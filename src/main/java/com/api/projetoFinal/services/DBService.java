@@ -9,11 +9,13 @@ import com.api.projetoFinal.domain.Admin;
 import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.Empreendedor;
+import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.repositories.AdminRepository;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import com.api.projetoFinal.repositories.EmpreendedorRepository;
+import com.api.projetoFinal.repositories.LojaRepository;
 import com.api.projetoFinal.repositories.ProdutoRepository;
 
 @Service
@@ -30,6 +32,9 @@ public class DBService {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private LojaRepository lojarepository;
 
 	public void instanciaDB() {
 		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", "1234", "21992934144",
@@ -52,11 +57,14 @@ public class DBService {
 		
 
 		Admin a1 = new Admin(null, "Palloma Gulliver", "gulliver.palloma@gmail.com", "p1234");
+		
+		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3);
 
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));
 		adminRepository.saveAll(Arrays.asList(a1));
 		produtoRepository.saveAll(Arrays.asList(p1));
+		lojarepository.saveAll(Arrays.asList(l1));
 		
 
 	}

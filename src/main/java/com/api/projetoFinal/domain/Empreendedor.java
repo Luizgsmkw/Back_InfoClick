@@ -4,6 +4,8 @@ import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
@@ -33,6 +35,11 @@ public class Empreendedor implements Serializable {
     private String bairro;
     private String rua;
     private String numero;
+    
+       
+    @JsonIgnore
+    @OneToOne(mappedBy = "empreendedor")
+    private Loja loja;
 
     public Empreendedor(EmpreendedorDTO obj){
         super();
@@ -72,7 +79,8 @@ public class Empreendedor implements Serializable {
 
     }
 
-    public Empreendedor() {
+   
+	public Empreendedor() {
         super();
         setPerfil(Perfil.EMPREENDEDOR);
     }

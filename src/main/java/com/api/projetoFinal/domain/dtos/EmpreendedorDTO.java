@@ -1,5 +1,6 @@
 package com.api.projetoFinal.domain.dtos;
 import com.api.projetoFinal.domain.Empreendedor;
+import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 
@@ -28,8 +29,7 @@ public class EmpreendedorDTO extends Empreendedor {
     protected String bairro;
     protected String rua;
     protected String numero;
-
-
+    protected Loja loja;
     public EmpreendedorDTO() {
         super();
         setPerfil(Perfil.EMPREENDEDOR);
@@ -51,6 +51,7 @@ public class EmpreendedorDTO extends Empreendedor {
         this.bairro = obj.getBairro();
         this.rua = obj.getRua();
         this.numero = obj.getNumero();
+        this.loja = obj.getLoja();
         setPerfil(Perfil.EMPREENDEDOR);
     }
 
@@ -172,5 +173,13 @@ public class EmpreendedorDTO extends Empreendedor {
 
     public void setRamo(Ramo ramo) {
         this.ramo = ramo;
+    }
+
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 }

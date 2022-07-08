@@ -1,95 +1,46 @@
-package com.api.projetoFinal.domain;
+package com.api.projetoFinal.domain.dtos;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import com.api.projetoFinal.domain.dtos.ProdutoDTO;
+import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
 
-@Entity
-@Table(name = "produtos")
-public class Produto {
+public class ProdutoDTO extends Produto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
-
-	@Column(name = "name")
+	@NotNull(message = "O campo NAME não poderá ser nulo")
 	private String name;
-
-	@Column(name = "produtoValor")
+	@NotNull(message = "O valor do produto não poderá ser nulo")
 	private Double produtoValor;
-
-	@Column(name = "produtoDescricao")
+	@NotNull(message = "A descrição do produto não poderá ser nulo")
 	private String produtoDescricao;
-
-	@Column(name = "categoria_id")
 	private Categoria categoria;
-
-	@Column(name = "produtoEstoque")
 	private Integer produtoEstoque;
-
-	@Column(name = "produtoStatus")
 	private Integer produtoStatus;
-
-	@Column(name = "produtoImagem")
 	private String produtoImagem;
-
-	@Column(name = "produtoDesconto")
 	private Double produtoDesconto;
-
-	@Column(name = "dataCriacao")
-	@CreationTimestamp
 	private Date dataCriacao;
-
-	@Column(name = "ultimaAtualizacao")
-	@UpdateTimestamp
 	private Date ultimaAtualizacao;
 
-	public Produto() {
+	public ProdutoDTO() {
 		super();
 	}
 
-	public Produto(ProdutoDTO obj) {
+	public ProdutoDTO(Produto obj) {
 		super();
 		this.id = obj.getId();
 		this.name = obj.getName();
-		this.produtoValor = obj.getProdutoValor();
+		this.produtoValor = obj.getProdutoDesconto();
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
-		this.produtoStatus = obj.getProdutoStatus();
+		this.produtoStatus = obj.isProdutoStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
-		this.dataCriacao = obj.getDataCriacao();
-		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
-	}
-
-	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
-			Integer produtoEstoque, Integer produtoStatus, String produtoImagem, Double produtoDesconto,
-			Date dataCriacao, Date ultimaAtualizacao) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.produtoValor = produtoValor;
-		this.produtoDescricao = produtoDescricao;
-		this.categoria = categoria;
-		this.produtoEstoque = produtoEstoque;
-		this.produtoStatus = produtoStatus;
-		this.produtoImagem = produtoImagem;
-		this.produtoDesconto = produtoDesconto;
-		this.dataCriacao = dataCriacao;
-		this.ultimaAtualizacao = ultimaAtualizacao;
 	}
 
 	public Integer getId() {
@@ -140,7 +91,7 @@ public class Produto {
 		this.produtoEstoque = produtoEstoque;
 	}
 
-	public Integer isProdutoStatus() {
+	public Integer getProdutoStatus() {
 		return produtoStatus;
 	}
 

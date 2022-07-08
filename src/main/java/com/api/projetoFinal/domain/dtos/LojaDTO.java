@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -13,7 +12,7 @@ public class LojaDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer idLoja;	
-	@JsonFormat(pattern = "dd/MM/aaaa")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCriacao = LocalDate.now();
 	private String corDeFundo;
 	@NotNull(message = "O campo NOME DA LOJA não poderá ser nulo")

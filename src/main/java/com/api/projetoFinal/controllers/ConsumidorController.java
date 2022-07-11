@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-@RequestMapping(value = "/service/consumidores")
+@RequestMapping(value = "service/consumidores")
 public class ConsumidorController {
 
     @Autowired
     private ConsumidorService service;
 
-    @GetMapping(value = "find/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Consumidor> findById(@PathVariable Integer id){
         Consumidor obj = service.findById(id);
         return ResponseEntity.ok().body(new ConsumidorDTO(obj));
@@ -43,14 +43,14 @@ public class ConsumidorController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PutMapping(value = "update/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<ConsumidorDTO> updateConsumidor(
             @PathVariable Integer id, @RequestBody ConsumidorDTO objDto){
         Consumidor obj = service.update(id, objDto);
         return ResponseEntity.ok().body(new ConsumidorDTO(obj));
     }
 
-    @DeleteMapping(value="delete/{id}")
+    @DeleteMapping(value="/{id}")
     public ResponseEntity<ConsumidorDTO> delete(@PathVariable Integer id){
         service.delete(id);
         return ResponseEntity.noContent().build();

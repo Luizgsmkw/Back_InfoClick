@@ -41,7 +41,6 @@ public class ProdutoService {
 	}
 
 	public void delete(Integer id) {
-		Produto obj = findById(id);
 		repository.deleteById(id);
 	}
 }

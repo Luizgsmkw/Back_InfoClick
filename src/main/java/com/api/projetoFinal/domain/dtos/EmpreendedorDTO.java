@@ -5,6 +5,9 @@ import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class EmpreendedorDTO extends Empreendedor {
 
@@ -19,7 +22,8 @@ public class EmpreendedorDTO extends Empreendedor {
     protected String email;
     @NotNull(message = "O campo de SENHA não pode ser nulo")
     protected String password;
-    protected Perfil perfil;
+    protected Set<Integer> perfil = new HashSet<>();;
+
     protected String celular;
     @NotNull(message = "O campo de RAMO não pode ser nulo")
     protected Ramo ramo;
@@ -32,7 +36,6 @@ public class EmpreendedorDTO extends Empreendedor {
     protected Loja loja;
     public EmpreendedorDTO() {
         super();
-        setPerfil(Perfil.EMPREENDEDOR);
     }
 
     public EmpreendedorDTO(Empreendedor obj) {
@@ -42,7 +45,7 @@ public class EmpreendedorDTO extends Empreendedor {
         this.cnpj = obj.getCnpj();
         this.email = obj.getEmail();
         this.password = obj.getPassword();
-        this.perfil = obj.getPerfil();
+        this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.celular = obj.getCelular();
         this.ramo = obj.getRamo();
         this.cep = obj.getCep();
@@ -52,14 +55,13 @@ public class EmpreendedorDTO extends Empreendedor {
         this.rua = obj.getRua();
         this.numero = obj.getNumero();
         this.loja = obj.getLoja();
-        setPerfil(Perfil.EMPREENDEDOR);
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Set<Perfil> getPerfil() {
+        return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void setPerfil(Perfil perfil) {
+    public void setPerfil(Set<Integer> perfil) {
         this.perfil = perfil;
     }
 

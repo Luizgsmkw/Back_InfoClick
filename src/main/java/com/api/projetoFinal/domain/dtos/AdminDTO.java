@@ -3,6 +3,10 @@ package com.api.projetoFinal.domain.dtos;
 import com.api.projetoFinal.domain.Admin;
 import com.api.projetoFinal.domain.enums.Perfil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class AdminDTO extends Admin {
 
 	private static final long serialVersionUID = 1L;
@@ -10,12 +14,11 @@ public class AdminDTO extends Admin {
 	protected Integer idAdmin;
 	protected String nome;
 	protected String email;
-	protected String senha;
-	protected Perfil perfil;
+	protected String password;
+	protected Set<Integer> perfil = new HashSet<>();
 
 	public AdminDTO() {
 		super();
-		setPerfil(Perfil.ADMIN);
 	}
 
 	public AdminDTO(Admin obj) {
@@ -23,18 +26,18 @@ public class AdminDTO extends Admin {
 		this.idAdmin = obj.getIdAdmin();
 		this.nome = obj.getNome();
 		this.email = obj.getEmail();
-		this.senha = obj.getSenha();
-		this.perfil = obj.getPerfil();
-		setPerfil(Perfil.ADMIN);
+		this.password = obj.getPassword();
+		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Set<Perfil> getPerfil() {
+		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Perfil perfil) {
+	public void setPerfil(Set<Integer> perfil) {
 		this.perfil = perfil;
 	}
+
 
 	public Integer getIdAdmin() {
 		return idAdmin;
@@ -60,11 +63,12 @@ public class AdminDTO extends Admin {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+
 }

@@ -5,6 +5,10 @@ import javax.validation.constraints.NotNull;
 import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.enums.Perfil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class ConsumidorDTO extends Consumidor {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +22,7 @@ public class ConsumidorDTO extends Consumidor {
 	protected String email;
 	@NotNull(message = "O campo de SENHA não pode ser nulo")
 	protected String password;
-	protected Perfil perfil;
+	protected Set<Integer> perfil = new HashSet<>();;
 	protected String celular;
 	protected String cep;
 	protected String estado;
@@ -29,7 +33,6 @@ public class ConsumidorDTO extends Consumidor {
 
 	public ConsumidorDTO() {
 		super();
-		setPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public ConsumidorDTO(Consumidor obj) {
@@ -39,7 +42,7 @@ public class ConsumidorDTO extends Consumidor {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.password = obj.getPassword();
-		this.perfil = obj.getPerfil();
+		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.celular = obj.getCelular();
 		this.cep = obj.getCep();
 		this.estado = obj.getEstado();
@@ -47,14 +50,13 @@ public class ConsumidorDTO extends Consumidor {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
-		setPerfil(Perfil.CONSUMIDOR);
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Set<Perfil> getPerfil() {
+		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Perfil perfil) {
+	public void setPerfil(Set<Integer> perfil) {
 		this.perfil = perfil;
 	}
 
@@ -153,5 +155,7 @@ public class ConsumidorDTO extends Consumidor {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
+
+
 
 }

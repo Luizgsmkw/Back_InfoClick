@@ -4,13 +4,16 @@ import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Empreendedor implements Serializable {
@@ -26,7 +29,9 @@ public class Empreendedor implements Serializable {
     @Column(unique = true)
     private String email;
     private String password;
-    private Perfil perfil;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIL_EMPREENDEDOR")
+    private Set<Integer> perfil =  new HashSet<>();
     private String celular;
     private Ramo ramo;
     private String cep;
@@ -46,7 +51,7 @@ public class Empreendedor implements Serializable {
         this.cnpj = obj.getCnpj();
         this.email = obj.getEmail();
         this.password = obj.getPassword();
-        this.perfil = obj.getPerfil();
+        this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.celular = obj.getCelular();
         this.ramo = obj.getRamo();
         this.cep = obj.getCep();
@@ -56,6 +61,7 @@ public class Empreendedor implements Serializable {
         this.rua = obj.getRua();
         this.numero = obj.getNumero();
         this.loja = obj.getLoja();
+
     }
 
     public Empreendedor(Integer idEmpreendedor, String nomeNegocio, @CNPJ String cnpj, String email, String password,
@@ -74,13 +80,12 @@ public class Empreendedor implements Serializable {
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;
-        setPerfil(Perfil.EMPREENDEDOR);
-
+        addPerfil(Perfil.EMPREENDEDOR);
     }
 
 	public Empreendedor() {
         super();
-        setPerfil(Perfil.EMPREENDEDOR);
+        addPerfil(Perfil.EMPREENDEDOR);
     }
     public Loja getLoja() {
         return loja;
@@ -90,14 +95,13 @@ public class Empreendedor implements Serializable {
         this.loja = loja;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Set<Perfil> getPerfil() {
+        return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void addPerfil(Perfil perfil) {
+        this.perfil.add(perfil.getCodigo());
     }
-
     public Ramo getRamo() {
         return ramo;
     }

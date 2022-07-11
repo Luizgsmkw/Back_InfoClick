@@ -2,14 +2,22 @@ package com.api.projetoFinal.domain;
 
 import java.sql.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.api.projetoFinal.domain.dtos.ProdutoDTO;
 import com.api.projetoFinal.domain.enums.Categoria;
+import com.api.projetoFinal.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "produtos")
@@ -36,7 +44,7 @@ public class Produto {
 	private Integer produtoEstoque;
 
 	@Column(name = "produtoStatus")
-	private Integer produtoStatus;
+	private Status status;
 
 	@Column(name = "produtoImagem")
 	private String produtoImagem;
@@ -69,7 +77,7 @@ public class Produto {
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
-		this.produtoStatus = obj.getProdutoStatus();
+		this.status = obj.getStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.loja = obj.getLoja();
@@ -77,8 +85,8 @@ public class Produto {
 	}
 
 	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
-			Integer produtoEstoque, Integer produtoStatus, String produtoImagem, Double produtoDesconto,
-			Date dataCriacao, Date ultimaAtualizacao, Loja idLoja) {
+			Integer produtoEstoque, Status status, String produtoImagem, Double produtoDesconto, Date dataCriacao,
+			Date ultimaAtualizacao, Loja idLoja) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -86,7 +94,7 @@ public class Produto {
 		this.produtoDescricao = produtoDescricao;
 		this.categoria = categoria;
 		this.produtoEstoque = produtoEstoque;
-		this.produtoStatus = produtoStatus;
+		this.status = status;
 		this.produtoImagem = produtoImagem;
 		this.produtoDesconto = produtoDesconto;
 		this.dataCriacao = dataCriacao;
@@ -94,9 +102,6 @@ public class Produto {
 		this.loja = idLoja;
 	}
 
-	public Integer getProdutoStatus() {
-		return produtoStatus;
-	}
 	public Loja getLoja() {
 		return loja;
 	}
@@ -104,6 +109,7 @@ public class Produto {
 	public void setLoja(Loja loja) {
 		this.loja = loja;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -152,12 +158,12 @@ public class Produto {
 		this.produtoEstoque = produtoEstoque;
 	}
 
-	public Integer isProdutoStatus() {
-		return produtoStatus;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setProdutoStatus(Integer produtoStatus) {
-		this.produtoStatus = produtoStatus;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getProdutoImagem() {

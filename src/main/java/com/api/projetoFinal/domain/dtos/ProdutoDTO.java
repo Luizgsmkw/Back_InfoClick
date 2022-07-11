@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
+import com.api.projetoFinal.domain.enums.Status;
 
 public class ProdutoDTO extends Produto {
 
@@ -20,7 +21,7 @@ public class ProdutoDTO extends Produto {
 	protected String produtoDescricao;
 	protected Categoria categoria;
 	protected Integer produtoEstoque;
-	protected Integer produtoStatus;
+	protected Status status;
 	protected String produtoImagem;
 	protected Double produtoDesconto;
 	protected Date dataCriacao;
@@ -38,7 +39,7 @@ public class ProdutoDTO extends Produto {
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
-		this.produtoStatus = obj.isProdutoStatus();
+		this.status = obj.getStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.dataCriacao = obj.getDataCriacao();
@@ -93,12 +94,12 @@ public class ProdutoDTO extends Produto {
 		this.produtoEstoque = produtoEstoque;
 	}
 
-	public Integer getProdutoStatus() {
-		return produtoStatus;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setProdutoStatus(Integer produtoStatus) {
-		this.produtoStatus = produtoStatus;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getProdutoImagem() {

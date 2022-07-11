@@ -41,6 +41,8 @@ public class ProdutoDTO extends Produto {
 		this.produtoStatus = obj.isProdutoStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
+		this.dataCriacao = obj.getDataCriacao();
+		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
 	}
 
 	public Integer getId() {

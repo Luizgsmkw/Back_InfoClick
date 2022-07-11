@@ -25,13 +25,13 @@ import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 import com.api.projetoFinal.services.EmpreendedorService;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
-@RequestMapping(value = "/service/empreendedores")
+@CrossOrigin("http://localhost:4200")
+@RequestMapping(value = "service/empreendedores")
 public class EmpreendedorController {
 	@Autowired
 	private EmpreendedorService service;
 	
-	@GetMapping(value = "find/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<Empreendedor> findById(@PathVariable Integer id) {
 		Empreendedor obj = this.service.findById(id);
 		return ResponseEntity.ok().body(obj);
@@ -52,14 +52,14 @@ public class EmpreendedorController {
 		 
 	 }
 	 
-	  @PutMapping(value = "update/{id}")
+	  @PutMapping(value = "/{id}")
 	    public ResponseEntity<EmpreendedorDTO> updateEmpreendedor(
 	            @PathVariable Integer id, @RequestBody EmpreendedorDTO objDto){
 	        Empreendedor obj = service.update(id, objDto);
 	        return ResponseEntity.ok().body(new EmpreendedorDTO(obj));
 	    }
 	  
-	  @DeleteMapping(value="delete/{id}")
+	  @DeleteMapping(value="/{id}")
 		public ResponseEntity<EmpreendedorDTO> delete(@PathVariable Integer id){
 			service.delete(id);
 			return ResponseEntity.noContent().build();

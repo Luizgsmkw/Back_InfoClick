@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,9 +39,9 @@ public class ProdutoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> findAllProduto() {
+	public ResponseEntity<List<ProdutoDTO>> findAllProduto() {
 		List<Produto> list = service.findAllProduto();
-		List<Produto> listDto = list.stream().map(prod -> new ProdutoDTO(prod)).collect(Collectors.toList());
+		List<ProdutoDTO> listDto = list.stream().map(prod -> new ProdutoDTO(prod)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 
@@ -51,13 +52,13 @@ public class ProdutoController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping(value = "update/{id}")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<ProdutoDTO> updateProduto(@PathVariable Integer id, @RequestBody ProdutoDTO objDto) {
 		Produto obj = service.update(id, objDto);
 		return ResponseEntity.ok().body(new ProdutoDTO(obj));
 	}
 
-	@DeleteMapping(value = "delete/{id}")
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ProdutoDTO> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();

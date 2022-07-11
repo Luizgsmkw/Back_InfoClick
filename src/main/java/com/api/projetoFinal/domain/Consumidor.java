@@ -1,13 +1,10 @@
 package com.api.projetoFinal.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -28,7 +25,9 @@ public class Consumidor implements Serializable {
 	@Column(unique = true)
 	private String email;
 	private String password;
-	private Perfil perfil;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIL_CONSUMIDOR")
+	private Set<Integer> perfil =  new HashSet<>();
 	private String celular;
 	private String cep;
 	private String estado;
@@ -44,7 +43,6 @@ public class Consumidor implements Serializable {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.password = obj.getPassword();
-		this.perfil = obj.getPerfil();
 		this.celular = obj.getCelular();
 		this.cep = obj.getCep();
 		this.estado = obj.getEstado();
@@ -52,6 +50,7 @@ public class Consumidor implements Serializable {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
+		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
 	public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, String celular,
@@ -68,20 +67,20 @@ public class Consumidor implements Serializable {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
-		setPerfil(Perfil.CONSUMIDOR);
+		addPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Consumidor() {
 		super();
-		setPerfil(Perfil.CONSUMIDOR);
+		addPerfil(Perfil.CONSUMIDOR);
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Set<Perfil> getPerfil() {
+		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void addPerfil(Perfil perfil) {
+		this.perfil.add(perfil.getCodigo());
 	}
 
 	public Integer getIdConsumidor() {

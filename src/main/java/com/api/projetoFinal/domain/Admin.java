@@ -1,11 +1,11 @@
 package com.api.projetoFinal.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.api.projetoFinal.domain.dtos.AdminDTO;
 import com.api.projetoFinal.domain.enums.Perfil;
@@ -19,38 +19,40 @@ public class Admin implements Serializable {
 	private Integer idAdmin;
 	private String nome;
 	private String email;
-	private String senha;
-	private Perfil perfil;
+	private String password;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIL_ADMIN")
+	private Set<Integer> perfil =  new HashSet<>();
 
 	public Admin(AdminDTO obj) {
 		super();
 		this.idAdmin = obj.getIdAdmin();
 		this.nome = obj.getNome();
 		this.email = obj.getEmail();
-		this.senha = obj.getSenha();
-		this.perfil = obj.getPerfil();
+		this.password = obj.getPassword();
+		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
-	public Admin(Integer idAdmin, String nome, String email, String senha) {
+	public Admin(Integer idAdmin, String nome, String email, String password) {
 		super();
 		this.idAdmin = idAdmin;
 		this.nome = nome;
 		this.email = email;
-		this.senha = senha;
-		setPerfil(Perfil.ADMIN);
+		this.password = password;
+		addPerfil(Perfil.ADMIN);
 	}
 
 	public Admin() {
 		super();
-		setPerfil(Perfil.ADMIN);
+		addPerfil(Perfil.ADMIN);
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Set<Perfil> getPerfil() {
+		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void addPerfil(Perfil perfil) {
+		this.perfil.add(perfil.getCodigo());
 	}
 
 	public Integer getIdAdmin() {
@@ -77,11 +79,11 @@ public class Admin implements Serializable {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

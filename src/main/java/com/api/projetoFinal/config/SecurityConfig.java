@@ -24,6 +24,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private static final String[] PUBLIC_MATCHERS ={"/h2-console/**"};
 
+    private static final String[] PUBLIC_WHITELIST = {
+            "/service/produto",
+        };
     @Autowired
     private Environment env;
 
@@ -45,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS)
+                .permitAll()
+                .antMatchers(PUBLIC_WHITELIST)
                 .permitAll()
                 .anyRequest().authenticated();
 

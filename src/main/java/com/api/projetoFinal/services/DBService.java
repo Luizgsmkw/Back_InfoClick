@@ -12,6 +12,7 @@ import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Ramo;
+import com.api.projetoFinal.domain.enums.Status;
 import com.api.projetoFinal.repositories.AdminRepository;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import com.api.projetoFinal.repositories.EmpreendedorRepository;
@@ -32,7 +33,7 @@ public class DBService {
 
 	@Autowired
 	private LojaRepository lojarepository;
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
@@ -55,8 +56,8 @@ public class DBService {
 
 		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3);
 
-		Produto p1 = new Produto(null, "Alexandre", 5.0, "Alexandre", Categoria.HARDWARE, 1001, 5, "blabla", 1.0, null,
-				null, l1);
+		Produto p1 = new Produto(null, "Alexandre", 5.0, "Alexandre", Categoria.HARDWARE, 1001, Status.ATIVO, "blabla",
+				1.0, null, null, l1);
 
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));

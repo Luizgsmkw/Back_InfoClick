@@ -72,8 +72,6 @@ public class Produto {
 		this.produtoStatus = obj.getProdutoStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
-		this.dataCriacao = obj.getDataCriacao();
-		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
 		this.loja = obj.getLoja();
 
 	}
@@ -94,7 +92,6 @@ public class Produto {
 		this.dataCriacao = dataCriacao;
 		this.ultimaAtualizacao = ultimaAtualizacao;
 		this.loja = idLoja;
-
 	}
 
 	public Integer getProdutoStatus() {

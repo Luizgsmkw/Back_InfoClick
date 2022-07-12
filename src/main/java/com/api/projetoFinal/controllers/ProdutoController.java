@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,11 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.dtos.ProdutoDTO;
+import com.api.projetoFinal.repositories.ProdutoRepository;
 import com.api.projetoFinal.services.ProdutoService;
 
 @RestController
@@ -31,6 +35,9 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoService service;
+
+	@Autowired
+	private ProdutoRepository repository;
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Produto> findById(@PathVariable Integer id) {
@@ -44,6 +51,15 @@ public class ProdutoController {
 		List<ProdutoDTO> listDto = list.stream().map(prod -> new ProdutoDTO(prod)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+
+	@GetMapping(value = "/buscarPorNome")
+	@ResponseBody
+	public ResponseEntity<List<Produto>> buscarPorNome(@RequestParam (name = "name") String name) {
+		
+		List<Produto> produto = repository.buscarPorNome(name.trim().toLowerCase());
+       
+        return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
+    }
 
 	@PostMapping
 	public ResponseEntity<ProdutoDTO> createProduto(@Valid @RequestBody ProdutoDTO objDto) {

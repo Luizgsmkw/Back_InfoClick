@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private static final String[] PUBLIC_MATCHERS ={"/h2-console/**"};
 
     private static final String[] PUBLIC_WHITELIST = {
-            "/service/produto",
+            "/**",
         };
     @Autowired
     private Environment env;

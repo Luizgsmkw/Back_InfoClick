@@ -36,6 +36,7 @@ public class EmpreendedorDTO extends Empreendedor {
     protected Loja loja;
     public EmpreendedorDTO() {
         super();
+        addPerfil(Perfil.EMPREENDEDOR);
     }
 
     public EmpreendedorDTO(Empreendedor obj) {
@@ -55,14 +56,15 @@ public class EmpreendedorDTO extends Empreendedor {
         this.rua = obj.getRua();
         this.numero = obj.getNumero();
         this.loja = obj.getLoja();
+        addPerfil(Perfil.EMPREENDEDOR);
     }
 
     public Set<Perfil> getPerfil() {
         return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void setPerfil(Set<Integer> perfil) {
-        this.perfil = perfil;
+    public void addPerfil(Perfil perfil) {
+        this.perfil.add(perfil.getCodigo());
     }
 
     public String getCep() {

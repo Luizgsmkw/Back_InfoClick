@@ -19,6 +19,7 @@ public class AdminDTO extends Admin {
 
 	public AdminDTO() {
 		super();
+		addPerfil(Perfil.ADMIN);
 	}
 
 	public AdminDTO(Admin obj) {
@@ -28,14 +29,15 @@ public class AdminDTO extends Admin {
 		this.email = obj.getEmail();
 		this.password = obj.getPassword();
 		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		addPerfil(Perfil.ADMIN);
 	}
 
 	public Set<Perfil> getPerfil() {
 		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Set<Integer> perfil) {
-		this.perfil = perfil;
+	public void addPerfil(Perfil perfil) {
+		this.perfil.add(perfil.getCodigo());
 	}
 
 

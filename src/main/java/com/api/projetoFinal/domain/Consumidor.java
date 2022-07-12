@@ -67,12 +67,10 @@ public class Consumidor implements Serializable {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
-		addPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Consumidor() {
 		super();
-		addPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Set<Perfil> getPerfil() {

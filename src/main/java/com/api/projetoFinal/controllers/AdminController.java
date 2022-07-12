@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<AdminDTO>> findAllAdmin() {
 		List<Admin> list = service.findAllAdmin();
@@ -30,10 +32,10 @@ public class AdminController {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AdminDTO> findById(@PathVariable Integer id) {
 		Admin obj = service.findById(id);
 		return ResponseEntity.ok().body(new AdminDTO(obj));
 	}
-
 }

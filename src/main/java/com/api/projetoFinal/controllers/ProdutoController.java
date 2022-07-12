@@ -82,4 +82,13 @@ public class ProdutoController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping(value = "/buscarPorCategoria")
+	@ResponseBody
+	public ResponseEntity<List<Produto>> buscarPorCategoria(@RequestParam (name =  "categoria") String categoria) {
+		
+		List<Produto> produto = repository.buscarPorCategoria(categoria);
+       
+        return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
+    }
 }

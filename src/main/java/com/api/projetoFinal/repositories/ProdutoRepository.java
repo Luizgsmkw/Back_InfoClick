@@ -13,4 +13,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     Optional<Produto> findById(Integer id);
     @Query(value = "select u from Produto u where lower(trim(u.name)) like %?1%")
    List<Produto> buscarPorNome(String name );
+    
+    @Query(value = "select u from Produto u where lower(trim(u.categoria)) like %?1%")
+    List<Produto> buscarPorCategoria(String categoria );
 }

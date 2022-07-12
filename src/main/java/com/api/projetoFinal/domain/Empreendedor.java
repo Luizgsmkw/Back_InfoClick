@@ -80,12 +80,10 @@ public class Empreendedor implements Serializable {
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;
-        addPerfil(Perfil.EMPREENDEDOR);
     }
 
 	public Empreendedor() {
         super();
-        addPerfil(Perfil.EMPREENDEDOR);
     }
     public Loja getLoja() {
         return loja;

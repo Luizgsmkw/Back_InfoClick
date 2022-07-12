@@ -39,12 +39,10 @@ public class Admin implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
-		addPerfil(Perfil.ADMIN);
 	}
 
 	public Admin() {
 		super();
-		addPerfil(Perfil.ADMIN);
 	}
 
 	public Set<Perfil> getPerfil() {

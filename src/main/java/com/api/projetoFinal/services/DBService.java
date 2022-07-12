@@ -2,6 +2,7 @@ package com.api.projetoFinal.services;
 
 import java.util.Arrays;
 
+import com.api.projetoFinal.domain.enums.Perfil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

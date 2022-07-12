@@ -33,8 +33,8 @@ public class ConsumidorDTO extends Consumidor {
 
 	public ConsumidorDTO() {
 		super();
+		addPerfil(Perfil.CONSUMIDOR);
 	}
-
 	public ConsumidorDTO(Consumidor obj) {
 		super();
 		this.idConsumidor = obj.getIdConsumidor();
@@ -50,14 +50,15 @@ public class ConsumidorDTO extends Consumidor {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
+		addPerfil(Perfil.CONSUMIDOR);
 	}
 
 	public Set<Perfil> getPerfil() {
 		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfil(Set<Integer> perfil) {
-		this.perfil = perfil;
+	public void addPerfil(Perfil perfil) {
+		this.perfil.add(perfil.getCodigo());
 	}
 
 	public String getCep() {

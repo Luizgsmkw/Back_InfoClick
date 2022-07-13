@@ -3,7 +3,9 @@ import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
+import org.hibernate.validator.constraints.br.CNPJ;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +18,10 @@ public class EmpreendedorDTO extends Empreendedor {
     protected Integer idEmpreendedor;
     @NotNull(message = "O campo Nome do negócio não poderá ser nulo")
     protected String nomeNegocio;
+    @CNPJ(message = "CNPJ Inválido")
     @NotNull(message = "O CNPJ não poderá ser nulo")
     protected String cnpj;
+    @Email(message = "Email inválido")
     @NotNull(message = "O E-MAIL não poderá ser nulo")
     protected String email;
     @NotNull(message = "O campo de SENHA não pode ser nulo")
@@ -25,7 +29,7 @@ public class EmpreendedorDTO extends Empreendedor {
     protected Set<Integer> perfil = new HashSet<>();;
 
     protected String celular;
-    @NotNull(message = "O campo de RAMO não pode ser nulo")
+    @NotNull(message = "O campo de RAMO não pode ser nulo, escolha alguma das opções")
     protected Ramo ramo;
     protected String cep;
     protected String estado;

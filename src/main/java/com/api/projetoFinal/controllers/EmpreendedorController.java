@@ -22,6 +22,8 @@ import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 import com.api.projetoFinal.services.EmpreendedorService;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping(value = "service/empreendedores")
@@ -43,7 +45,7 @@ public class EmpreendedorController {
 	}
 
 	@PostMapping
-	public ResponseEntity<EmpreendedorDTO> create(@RequestBody EmpreendedorDTO objDTO) {
+	public ResponseEntity<EmpreendedorDTO> create(@Valid @RequestBody EmpreendedorDTO objDTO) {
 		Empreendedor newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id")
 				.buildAndExpand(newObj.getIdEmpreendedor()).toUri();

@@ -53,7 +53,7 @@ public class Consumidor implements Serializable {
 		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
-	public Consumidor(Integer idConsumidor, String nome, String cpf, String email, String password, String celular,
+	public Consumidor(Integer idConsumidor, String nome,@CPF String cpf, String email, String password, String celular,
 			String cep, String estado, String cidade, String bairro, String rua, String numero) {
 		this.idConsumidor = idConsumidor;
 		this.nome = nome;

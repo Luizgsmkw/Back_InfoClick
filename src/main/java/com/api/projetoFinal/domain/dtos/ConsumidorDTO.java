@@ -1,9 +1,11 @@
 package com.api.projetoFinal.domain.dtos;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.enums.Perfil;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +18,10 @@ public class ConsumidorDTO extends Consumidor {
 	protected Integer idConsumidor;
 	@NotNull(message = "O campo NOME não poderá ser nulo")
 	protected String nome;
+	@CPF(message = "CPF inválido")
 	@NotNull(message = "O CPF não poderá ser nulo")
 	protected String cpf;
+	@Email(message = "Email inválido")
 	@NotNull(message = "O E-MAIL não poderá ser nulo")
 	protected String email;
 	@NotNull(message = "O campo de SENHA não pode ser nulo")

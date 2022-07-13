@@ -64,7 +64,7 @@ public class EmpreendedorService {
 	private void validaEmail(EmpreendedorDTO objDTO) {
 		Optional<Empreendedor> obj = repository.findByEmail(objDTO.getEmail());
 		if (obj.isPresent() && obj.get().getIdEmpreendedor() != objDTO.getIdEmpreendedor()) {
-			throw new DataIntegrityViolationException("CNPJ já cadastrado no Sistema");
+			throw new DataIntegrityViolationException("Email já cadastrado no Sistema");
 		}
 	}
 }

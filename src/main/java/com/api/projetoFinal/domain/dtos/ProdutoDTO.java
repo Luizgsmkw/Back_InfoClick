@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
 
+import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Status;
@@ -27,6 +28,7 @@ public class ProdutoDTO extends Produto {
 	protected Date dataCriacao;
 	protected Date ultimaAtualizacao;
 
+	protected Loja loja;
 	public ProdutoDTO() {
 		super();
 	}
@@ -44,6 +46,10 @@ public class ProdutoDTO extends Produto {
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.dataCriacao = obj.getDataCriacao();
 		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
+		this.loja = obj.getLoja();
+	}
+	public Loja getLoja() {
+		return loja;
 	}
 
 	public Integer getId() {

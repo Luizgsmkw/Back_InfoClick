@@ -81,7 +81,6 @@ public class Produto {
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.loja = obj.getLoja();
-
 	}
 
 	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
@@ -101,7 +100,6 @@ public class Produto {
 		this.ultimaAtualizacao = ultimaAtualizacao;
 		this.loja = idLoja;
 	}
-
 	public Loja getLoja() {
 		return loja;
 	}

@@ -30,7 +30,7 @@ private static final long serialVersionUID = 1L;
     @JoinColumn(name = "empreendedor_id")
     private Empreendedor empreendedor;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "loja")
 	private List<Produto> produtos = new ArrayList<>();
 	public Loja() {

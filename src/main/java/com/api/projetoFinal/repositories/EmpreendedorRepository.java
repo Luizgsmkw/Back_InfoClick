@@ -10,4 +10,5 @@ public interface EmpreendedorRepository extends JpaRepository<Empreendedor, Inte
 	
 	Optional<Empreendedor> findByCnpj(String cnpj);
     Optional<Empreendedor> findByEmail(String cnpj);
+    Optional<Empreendedor> findById(Integer id);
 }

@@ -44,6 +44,7 @@ private static final long serialVersionUID = 1L;
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
 		this.produtos = obj.getProdutos();
+		this.empreendedor= obj.getEmpreendedor();
 	}
 	public Loja(Integer idLoja, String corDeFundo, String nomeLoja, String descricaoLoja, Empreendedor empreendedor) {
 		

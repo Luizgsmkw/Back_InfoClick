@@ -1,7 +1,9 @@
 package com.api.projetoFinal.services;
 
+import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.dtos.LojaDTO;
+import com.api.projetoFinal.repositories.EmpreendedorRepository;
 import com.api.projetoFinal.repositories.LojaRepository;
 import com.api.projetoFinal.services.exceptions.ObjectNotFoundException;
 
@@ -17,6 +19,9 @@ public class LojaService {
 
     @Autowired
     private LojaRepository repository;
+
+    @Autowired
+    private EmpreendedorRepository empRepository;
     
     public Loja findById(Integer id) {
         Optional<Loja> obj = repository.findById(id);
@@ -27,11 +32,13 @@ public class LojaService {
         return repository.findAll();
     }
 
-    public Loja create(LojaDTO objDto) {
+    public Loja create(LojaDTO objDto, Integer idEmpreendedor) {
         objDto.setIdLoja(null);
+        Optional<Empreendedor> obj = empRepository.findById(idEmpreendedor);
+        objDto.setEmpreendedor(obj.get());
+
         Loja newObj = new Loja(objDto);
         return repository.save(newObj);
-
     }
 
     public Loja update(Integer id, LojaDTO objDto) {

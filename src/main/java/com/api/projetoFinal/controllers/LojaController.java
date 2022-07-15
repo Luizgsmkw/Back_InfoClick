@@ -44,15 +44,13 @@ public class LojaController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
-	@PostMapping
-	public ResponseEntity<LojaDTO> create(@RequestBody LojaDTO objDTO) {
-		Loja newObj = service.create(objDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id").buildAndExpand(newObj.getIdLoja())
-				.toUri();
-		return ResponseEntity.created(uri).build();
-
-	}
+	@PostMapping("/{idEmpreendedor}")
+    public ResponseEntity<LojaDTO> create(@PathVariable Integer idEmpreendedor, @RequestBody LojaDTO objDTO) {
+        Loja newObj = service.create(objDTO, idEmpreendedor);
+        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id").buildAndExpand(newObj.getIdLoja())
+                .toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
 	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")

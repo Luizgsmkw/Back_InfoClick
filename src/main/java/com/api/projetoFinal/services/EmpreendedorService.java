@@ -26,6 +26,9 @@ public class EmpreendedorService {
 		return obj.orElse(null);
 	}
 
+	public Integer findIdByEmail(String email){
+		return repository.findIdByEmail(email);
+	}
 	public List<Empreendedor> findAll() {
 		return repository.findAll();
 	}

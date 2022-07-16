@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private static final String[] PUBLIC_WHITELIST = {
             "/**",
+            "/**/**"
         };
     @Autowired
     private Environment env;

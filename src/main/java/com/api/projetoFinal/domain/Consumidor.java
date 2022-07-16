@@ -35,6 +35,8 @@ public class Consumidor implements Serializable {
 	private String bairro;
 	private String rua;
 	private String numero;
+	
+	private String profilePic;
 
 	public Consumidor(ConsumidorDTO obj) {
 		super();
@@ -50,11 +52,12 @@ public class Consumidor implements Serializable {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
+		this.profilePic = obj.getProfilePic();
 		this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
 	public Consumidor(Integer idConsumidor, String nome,@CPF String cpf, String email, String password, String celular,
-			String cep, String estado, String cidade, String bairro, String rua, String numero) {
+			String cep, String estado, String cidade, String bairro, String rua, String numero, String profilePic){
 		this.idConsumidor = idConsumidor;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -67,12 +70,21 @@ public class Consumidor implements Serializable {
 		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
+		this.profilePic = profilePic;
 	}
 
 	public Consumidor() {
 		super();
 	}
 
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
 	public Set<Perfil> getPerfil() {
 		return perfil.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}

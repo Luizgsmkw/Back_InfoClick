@@ -16,13 +16,11 @@ import java.util.Optional;
 
 @Service
 public class LojaService {
-
+    @Autowired
+    private EmpreendedorRepository empRepository;
     @Autowired
     private LojaRepository repository;
 
-    @Autowired
-    private EmpreendedorRepository empRepository;
-    
     public Loja findById(Integer id) {
         Optional<Loja> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não foi encontrado: " + id));

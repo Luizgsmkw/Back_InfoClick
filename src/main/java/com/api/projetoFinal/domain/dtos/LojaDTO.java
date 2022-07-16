@@ -24,6 +24,7 @@ public class LojaDTO  implements Serializable {
 	@NotNull(message = "Um empreendedor precisa estar vinculado a Loja")
 	protected Empreendedor empreendedor;
 	protected List<Produto> produtos;
+	protected String imagemLoja;
     public LojaDTO() {
 		super();
 	}
@@ -35,6 +36,15 @@ public class LojaDTO  implements Serializable {
 		this.nomeLoja = obj.getNomeLoja();
 		this.descricaoLoja = obj.getDescricaoLoja();
 		this.produtos = obj.getProdutos();
+		this.imagemLoja = obj.getImagemLoja();
+	}
+
+	public String getImagemLoja() {
+		return imagemLoja;
+	}
+
+	public void  setImagemLoja(String imagemLoja) {
+			this.imagemLoja = imagemLoja;
 	}
 
 	public Integer getIdLoja() {

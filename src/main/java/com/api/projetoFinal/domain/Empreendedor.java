@@ -26,7 +26,7 @@ public class Empreendedor implements Serializable {
     @CNPJ
     @Column(unique = true)
     private String cnpj;
-    @Column(unique = true)
+    @Column(unique = true, name="email")
     private String email;
     private String password;
     @ElementCollection(fetch = FetchType.EAGER)

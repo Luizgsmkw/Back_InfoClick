@@ -35,6 +35,8 @@ public class ConsumidorDTO extends Consumidor {
 	protected String rua;
 	protected String numero;
 
+	protected String profilePic;
+
 	public ConsumidorDTO() {
 		super();
 		addPerfil(Perfil.CONSUMIDOR);
@@ -54,7 +56,17 @@ public class ConsumidorDTO extends Consumidor {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
+		this.profilePic = obj.getProfilePic();
 		addPerfil(Perfil.CONSUMIDOR);
+	}
+
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	public Set<Perfil> getPerfil() {

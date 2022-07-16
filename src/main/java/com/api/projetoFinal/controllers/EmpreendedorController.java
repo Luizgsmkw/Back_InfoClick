@@ -37,6 +37,11 @@ public class EmpreendedorController {
 		return ResponseEntity.ok().body(obj);
 	}
 
+	@GetMapping(value = "/email/{email}")
+	public ResponseEntity<Integer> findIdByEmail(@PathVariable String email) {
+		Integer obj = this.service.findIdByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
 	@GetMapping
 	public ResponseEntity<List<EmpreendedorDTO>> findAll() {
 		List<Empreendedor> list = service.findAll();

@@ -44,9 +44,9 @@ public class DBService {
 
 	public void instanciaDB() {
 		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", encoder.encode("123456"), "21992934144",
-				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31");
+				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31", "mingau");
 		Consumidor c2 = new Consumidor(null, "Mingau", "382.670.620-09", "mingau@gmail.com", encoder.encode("123456"), "10881823033",
-				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31");
+				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31", "mingau");
 
 		Empreendedor e1 = new Empreendedor(null, "Loja 1", "73.900.564/0001-54", "loja1@gmail.com", encoder.encode("123456"),
 				"21988887777", Ramo.HARDWARE, "22720400", "Rio de Janeiro", "Rio de Janeiro", "Taquara", "maraville",
@@ -59,8 +59,8 @@ public class DBService {
 
 		Admin a1 = new Admin(null, "Palloma Gulliver", "gulliver.palloma@gmail.com", encoder.encode("123456"));
 
-		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3);
-		Loja l2 = new Loja(null, "Preto", "AMERICANAS", "Venda de Harware e software", e1);
+		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3,"teste");
+		Loja l2 = new Loja(null, "Preto", "AMERICANAS", "Venda de Harware e software", e1, "teste");
 		Produto p1 = new Produto(null, "Monitor Concórdia Gamer Curvo C32f 32\" 165hz 1ms Led Full Hd", 5.0, "O pior monitor do mundo", Categoria.HARDWARE, 1001, Status.ATIVO, "https://images.tcdn.com.br/img/img_prod/740836/monitor_concordia_gamer_curvo_c32f_32_165hz_1ms_led_full_hd_6769_1_1ee122e070f295e4eb70529e293463a7.png",
 				999.99, null, null, l1);
 

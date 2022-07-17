@@ -61,10 +61,9 @@ public class ProdutoController {
         return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
     }
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
-	@PostMapping
-	public ResponseEntity<ProdutoDTO> createProduto(@Valid @RequestBody ProdutoDTO objDto) {
-		Produto newObj = service.create(objDto);
+	@PostMapping(value = "/{id_loja}")
+	public ResponseEntity<ProdutoDTO> createProduto(@Valid @PathVariable Integer id_loja, @RequestBody ProdutoDTO objDto) {
+		Produto newObj = service.create(objDto, id_loja);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}

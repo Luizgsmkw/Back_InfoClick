@@ -4,8 +4,11 @@ import javax.persistence.*;
 
 import com.api.projetoFinal.domain.dtos.ConsumidorDTO;
 import com.api.projetoFinal.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 @Entity
@@ -16,6 +19,8 @@ public class Consumidor extends Pessoa {
 	@CPF
 	@Column(unique = true)
 	private String cpf;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataCriacao = LocalDate.now();
 
 	public Consumidor() {
 		super();
@@ -52,4 +57,13 @@ public class Consumidor extends Pessoa {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.api.projetoFinal.Security;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -7,7 +8,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class JWTUtil {
@@ -17,8 +20,13 @@ public class JWTUtil {
     @Value("{jwt.secret}")
     private String secret;
 
-    public String generetedToken(String email) {
-        return Jwts.builder().setSubject(email).setExpiration(new Date(System.currentTimeMillis() + expiration))
+    public String generetedToken(String email, Integer id, Collection<? extends GrantedAuthority> perfil
+    ) {
+        return Jwts.builder()
+                .setSubject(email)
+                .setId(id.toString())
+                .claim("Perfil", perfil.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
     }
 

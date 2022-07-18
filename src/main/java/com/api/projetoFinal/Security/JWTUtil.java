@@ -17,7 +17,7 @@ public class JWTUtil {
     @Value("{jwt.secret}")
     private String secret;
 
-    public String generetedTolken(String email) {
+    public String generetedToken(String email) {
         return Jwts.builder().setSubject(email).setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
     }

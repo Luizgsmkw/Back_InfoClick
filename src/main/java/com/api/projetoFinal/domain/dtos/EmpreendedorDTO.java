@@ -1,6 +1,7 @@
 package com.api.projetoFinal.domain.dtos;
 import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
+import com.api.projetoFinal.domain.Pessoa;
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -11,23 +12,26 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class EmpreendedorDTO extends Empreendedor {
+public class EmpreendedorDTO extends Pessoa {
 
     private static final long serialVersionUID = 1L;
 
-    protected Integer idEmpreendedor;
-    @NotNull(message = "O campo Nome do negócio não poderá ser nulo")
-    protected String nomeNegocio;
+    protected Integer id;
+    @NotNull(message = "O campo Nome não poderá ser nulo")
+    protected String nome;
+
     @CNPJ(message = "CNPJ Inválido")
     @NotNull(message = "O CNPJ não poderá ser nulo")
     protected String cnpj;
+
     @Email(message = "Email inválido")
     @NotNull(message = "O E-MAIL não poderá ser nulo")
     protected String email;
+
     @NotNull(message = "O campo de SENHA não pode ser nulo")
     protected String password;
-    protected Set<Integer> perfil = new HashSet<>();;
 
+    protected Set<Integer> perfil = new HashSet<>();;
     protected String celular;
     @NotNull(message = "O campo de RAMO não pode ser nulo, escolha alguma das opções")
     protected Ramo ramo;
@@ -38,6 +42,7 @@ public class EmpreendedorDTO extends Empreendedor {
     protected String rua;
     protected String numero;
     protected Loja loja;
+
     public EmpreendedorDTO() {
         super();
         addPerfil(Perfil.EMPREENDEDOR);
@@ -45,8 +50,8 @@ public class EmpreendedorDTO extends Empreendedor {
 
     public EmpreendedorDTO(Empreendedor obj) {
         super();
-        this.idEmpreendedor = obj.getIdEmpreendedor();
-        this.nomeNegocio = obj.getNomeNegocio();
+        this.id = obj.getId();
+        this.nome = obj.getNome();
         this.cnpj = obj.getCnpj();
         this.email = obj.getEmail();
         this.password = obj.getPassword();
@@ -119,34 +124,29 @@ public class EmpreendedorDTO extends Empreendedor {
         this.numero = numero;
     }
 
-    public Integer getIdEmpreendedor() {
-        return idEmpreendedor;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdEmpreendedor(Integer idEmpreendedor) {
-        this.idEmpreendedor = idEmpreendedor;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-
-    public String getNomeNegocio() {
-        return nomeNegocio;
+    public String getNome() {
+        return nome;
     }
 
-
-    public void setNomeNegocio(String nomeNegocio) {
-        this.nomeNegocio = nomeNegocio;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-
 
     public String getCnpj() {
         return cnpj;
     }
 
-
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
 
     public String getEmail() {
         return email;
@@ -160,16 +160,13 @@ public class EmpreendedorDTO extends Empreendedor {
         return password;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-
     public String getCelular() {
         return celular;
     }
-
 
     public void setCelular(String celular) {
         this.celular = celular;

@@ -13,6 +13,6 @@ public interface EmpreendedorRepository extends JpaRepository<Empreendedor, Inte
     Optional<Empreendedor> findByEmail(String cnpj);
     Optional<Empreendedor> findById(Integer id);
 
-    @Query(value = "select e.idEmpreendedor from Empreendedor e where e.email = ?1")
+    @Query(value = "select e.id from Empreendedor e where e.email = ?1")
     Integer findIdByEmail(String email);
 }

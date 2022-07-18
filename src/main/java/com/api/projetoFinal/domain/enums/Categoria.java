@@ -3,7 +3,7 @@ package com.api.projetoFinal.domain.enums;
 public enum Categoria {
     
 
-    HARDWARE(0), SOFTWARE(1), AMBOS(2);
+    NADA(0),HARDWARE(1), SOFTWARE(2), AMBOS(3);
 
     private Integer codigo;
 

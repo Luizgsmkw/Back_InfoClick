@@ -31,20 +31,19 @@ public class ConsumidorService {
 	}
 
 	public Consumidor create(ConsumidorDTO objDto) {
-		objDto.setIdConsumidor(null);
+		objDto.setId(null);
 		objDto.setPassword(encoder.encode(objDto.getPassword()));
-		validaCpf(objDto);
-		validaEmail(objDto);
+		validaEmailECpf(objDto);
 		Consumidor newObj = new Consumidor(objDto);
 		return repository.save(newObj);
 
 	}
 
 	public Consumidor update(Integer id, ConsumidorDTO objDto) {
-		objDto.setIdConsumidor(id);
+		objDto.setId(id);
+		objDto.setPassword(encoder.encode(objDto.getPassword()));
 		Consumidor oldObj = findById(id);
-		validaCpf(objDto);
-		validaEmail(objDto);
+		validaEmailECpf(objDto);
 		oldObj = new Consumidor(objDto);
 		return repository.save(oldObj);
 	}
@@ -54,19 +53,15 @@ public class ConsumidorService {
 		repository.deleteById(id);
 	}
 
-	private void validaCpf(ConsumidorDTO objDto) {
+	private void validaEmailECpf(ConsumidorDTO objDTO) {
+		Optional<Consumidor> obj = repository.findByEmail(objDTO.getCpf());
 
-		Optional<Consumidor> obj = repository.findByCpf(objDto.getCpf());
-		if (obj.isPresent() && obj.get().getIdConsumidor() != objDto.getIdConsumidor()) {
-			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+			throw new DataIntegrityViolationException("Email já cadastrado!");
 		}
-	}
-
-	private void validaEmail(ConsumidorDTO objDto) {
-		Optional<Consumidor> obj = repository.findByEmail(objDto.getEmail());
-		if (obj.isPresent() && obj.get().getIdConsumidor() != objDto.getIdConsumidor()) {
-			throw new DataIntegrityViolationException("Email já cadastrado no sistema!");
+		obj = repository.findByCpf(objDTO.getCpf());
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+			throw new DataIntegrityViolationException("CPF já cadastrado!");
 		}
-
 	}
 }

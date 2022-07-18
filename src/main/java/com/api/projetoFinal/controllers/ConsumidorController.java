@@ -34,7 +34,7 @@ public class ConsumidorController {
 	private ConsumidorService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Consumidor> findById(@PathVariable Integer id) {
+	public ResponseEntity<ConsumidorDTO> findById(@PathVariable Integer id) {
 		Consumidor obj = service.findById(id);
 		return ResponseEntity.ok().body(new ConsumidorDTO(obj));
 	}
@@ -42,7 +42,7 @@ public class ConsumidorController {
 	@GetMapping
 	public ResponseEntity<List<ConsumidorDTO>> findAllConsumidor() {
 		List<Consumidor> list = service.findAllConsumidor();
-		List<ConsumidorDTO> listDto = list.stream().map(tec -> new ConsumidorDTO(tec)).collect(Collectors.toList());
+		List<ConsumidorDTO> listDto = list.stream().map(con -> new ConsumidorDTO(con)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 
@@ -50,7 +50,7 @@ public class ConsumidorController {
 	public ResponseEntity<ConsumidorDTO> createConsumidor(@Valid @RequestBody ConsumidorDTO objDto) {
 		Consumidor newObj = service.create(objDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(newObj.getIdConsumidor()).toUri();
+				.buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 

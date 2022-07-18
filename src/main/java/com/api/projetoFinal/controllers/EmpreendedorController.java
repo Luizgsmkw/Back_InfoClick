@@ -32,9 +32,9 @@ public class EmpreendedorController {
 	private EmpreendedorService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Empreendedor> findById(@PathVariable Integer id) {
+	public ResponseEntity<EmpreendedorDTO> findById(@PathVariable Integer id) {
 		Empreendedor obj = this.service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(new EmpreendedorDTO(obj));
 	}
 
 	@GetMapping(value = "/email/{email}")
@@ -53,7 +53,7 @@ public class EmpreendedorController {
 	public ResponseEntity<EmpreendedorDTO> create(@Valid @RequestBody EmpreendedorDTO objDTO) {
 		Empreendedor newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id")
-				.buildAndExpand(newObj.getIdEmpreendedor()).toUri();
+				.buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
 	}

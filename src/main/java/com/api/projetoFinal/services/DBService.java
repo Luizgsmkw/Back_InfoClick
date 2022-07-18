@@ -2,12 +2,10 @@ package com.api.projetoFinal.services;
 
 import java.util.Arrays;
 
-import com.api.projetoFinal.domain.enums.Perfil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.api.projetoFinal.domain.Admin;
 import com.api.projetoFinal.domain.Consumidor;
 import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
@@ -15,7 +13,6 @@ import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.domain.enums.Status;
-import com.api.projetoFinal.repositories.AdminRepository;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
 import com.api.projetoFinal.repositories.EmpreendedorRepository;
 import com.api.projetoFinal.repositories.LojaRepository;
@@ -31,9 +28,6 @@ public class DBService {
 	private EmpreendedorRepository empreendedorRepository;
 
 	@Autowired
-	private AdminRepository adminRepository;
-
-	@Autowired
 	private LojaRepository lojarepository;
 
 	@Autowired
@@ -43,10 +37,10 @@ public class DBService {
 	private BCryptPasswordEncoder encoder;
 
 	public void instanciaDB() {
-		Consumidor c1 = new Consumidor(null, "Gabriel", "193.019.997-06", "gabriel@gmail.com", encoder.encode("123456"), "21992934144",
-				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31", "mingau");
+		Consumidor c1 = new Consumidor(null, "Gabriel", "gabriel@gmail.com", encoder.encode("123456"),"21992934144" , "2271140",
+				"Rio de Janeiro", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "193.019.997-06");
 		Consumidor c2 = new Consumidor(null, "Mingau", "382.670.620-09", "mingau@gmail.com", encoder.encode("123456"), "10881823033",
-				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "31", "mingau");
+				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "382.670.620-09");
 
 		Empreendedor e1 = new Empreendedor(null, "Loja 1", "73.900.564/0001-54", "loja1@gmail.com", encoder.encode("123456"),
 				"21988887777", Ramo.HARDWARE, "22720400", "Rio de Janeiro", "Rio de Janeiro", "Taquara", "maraville",
@@ -57,7 +51,6 @@ public class DBService {
 				"21992934155", Ramo.AMBOS, "22720400", "Rio de Janeiro", "Rio de Janeiro", "Taquara", "maraville",
 				"1155");
 
-		Admin a1 = new Admin(null, "Palloma Gulliver", "gulliver.palloma@gmail.com", encoder.encode("123456"));
 
 		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3,"teste");
 		Loja l2 = new Loja(null, "Preto", "AMERICANAS", "Venda de Harware e software", e1, "teste");
@@ -72,7 +65,6 @@ public class DBService {
 
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));
-		adminRepository.saveAll(Arrays.asList(a1));
 		lojarepository.saveAll(Arrays.asList(l1,l2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 

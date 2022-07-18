@@ -40,7 +40,7 @@ public class ProdutoController {
 	private ProdutoRepository repository;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produto> findById(@PathVariable Integer id) {
+	public ResponseEntity<ProdutoDTO> findById(@PathVariable Integer id) {
 		Produto obj = service.findById(id);
 		return ResponseEntity.ok().body(new ProdutoDTO(obj));
 	}

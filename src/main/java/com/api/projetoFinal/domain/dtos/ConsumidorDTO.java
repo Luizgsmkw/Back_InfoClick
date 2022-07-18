@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import com.api.projetoFinal.domain.Consumidor;
+import com.api.projetoFinal.domain.Pessoa;
 import com.api.projetoFinal.domain.enums.Perfil;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -11,21 +12,25 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ConsumidorDTO extends Consumidor {
+public class ConsumidorDTO extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Integer idConsumidor;
+	protected Integer id;
 	@NotNull(message = "O campo NOME não poderá ser nulo")
 	protected String nome;
+
 	@CPF(message = "CPF inválido")
 	@NotNull(message = "O CPF não poderá ser nulo")
 	protected String cpf;
+
 	@Email(message = "Email inválido")
 	@NotNull(message = "O E-MAIL não poderá ser nulo")
 	protected String email;
+
 	@NotNull(message = "O campo de SENHA não pode ser nulo")
 	protected String password;
+
 	protected Set<Integer> perfil = new HashSet<>();;
 	protected String celular;
 	protected String cep;
@@ -35,15 +40,14 @@ public class ConsumidorDTO extends Consumidor {
 	protected String rua;
 	protected String numero;
 
-	protected String profilePic;
-
 	public ConsumidorDTO() {
 		super();
 		addPerfil(Perfil.CONSUMIDOR);
 	}
+
 	public ConsumidorDTO(Consumidor obj) {
 		super();
-		this.idConsumidor = obj.getIdConsumidor();
+		this.id = obj.getId();
 		this.nome = obj.getNome();
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
@@ -56,17 +60,47 @@ public class ConsumidorDTO extends Consumidor {
 		this.bairro = obj.getBairro();
 		this.rua = obj.getRua();
 		this.numero = obj.getNumero();
-		this.profilePic = obj.getProfilePic();
 		addPerfil(Perfil.CONSUMIDOR);
 	}
 
-
-	public String getProfilePic() {
-		return profilePic;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setProfilePic(String profilePic) {
-		this.profilePic = profilePic;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Set<Perfil> getPerfil() {
@@ -75,6 +109,14 @@ public class ConsumidorDTO extends Consumidor {
 
 	public void addPerfil(Perfil perfil) {
 		this.perfil.add(perfil.getCodigo());
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	public String getCep() {
@@ -124,55 +166,4 @@ public class ConsumidorDTO extends Consumidor {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-
-	public Integer getIdConsumidor() {
-		return idConsumidor;
-	}
-
-	public void setIdConsumidor(Integer idConsumidor) {
-		this.idConsumidor = idConsumidor;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-
-
-
 }

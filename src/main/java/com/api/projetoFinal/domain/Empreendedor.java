@@ -4,11 +4,13 @@ import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
+
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 @Entity
@@ -20,6 +22,8 @@ public class Empreendedor extends Pessoa{
     @Column(unique = true)
     private String cnpj;
     private Ramo ramo;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataCriacao = LocalDate.now();
 
     @OneToOne(mappedBy = "empreendedor")
     private Loja loja;
@@ -48,7 +52,9 @@ public class Empreendedor extends Pessoa{
         this.loja = obj.getLoja();
     }
 
-    public Empreendedor(Integer id, String nome, @CNPJ String cnpj, String email, String password,
+ 
+
+	public Empreendedor(Integer id, String nome, @CNPJ String cnpj, String email, String password,
             String celular, Ramo ramo, String cep, String estado, String cidade, String bairro, String rua,
             String numero) {
         this.id = id;
@@ -82,6 +88,13 @@ public class Empreendedor extends Pessoa{
     public void setRamo(Ramo ramo) {
         this.ramo = ramo;
     }
+    public LocalDate getDataCriacao() {
+ 		return dataCriacao;
+ 	}
+
+ 	public void setDataCriacao(LocalDate dataCriacao) {
+ 		this.dataCriacao = dataCriacao;
+ 	}
     public Loja getLoja() {
         return loja;
     }

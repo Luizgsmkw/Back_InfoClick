@@ -90,4 +90,11 @@ public class ProdutoController {
        
         return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
     }
+
+	@GetMapping(value = "/buscames/{mes}")
+	public ResponseEntity<List<ProdutoDTO>> relatorioProdutosMes(@PathVariable Integer mes) {
+		List<Produto> list = service.relatorioProdutosMes(mes);
+		List<ProdutoDTO> listDto = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
 }

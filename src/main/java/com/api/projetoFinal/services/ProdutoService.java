@@ -3,13 +3,13 @@ package com.api.projetoFinal.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.api.projetoFinal.domain.Loja;
-import com.api.projetoFinal.repositories.LojaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.dtos.ProdutoDTO;
+import com.api.projetoFinal.repositories.LojaRepository;
 import com.api.projetoFinal.repositories.ProdutoRepository;
 import com.api.projetoFinal.services.exceptions.ObjectNotFoundException;
 
@@ -44,6 +44,10 @@ public class ProdutoService {
 		Produto oldObj = findById(id);
 		oldObj = new Produto(objDto);
 		return repository.save(oldObj);
+	}
+
+	public List<Produto> relatorioProdutosMes(Integer mes) {
+		return repository.listarProdMes(mes);
 	}
 
 	public void delete(Integer id) {

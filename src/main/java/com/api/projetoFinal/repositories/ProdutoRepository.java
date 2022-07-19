@@ -16,4 +16,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     
     @Query(value = "select u from Produto u where lower(trim(u.categoria)) like %?1%")
     List<Produto> buscarPorCategoria(String categoria );
+
+    @Query(value="call SPS_CRIACAO_PRODUTOS_MES(:mes)", nativeQuery = true)
+    List<Produto> listarProdMes( Integer mes);
 }

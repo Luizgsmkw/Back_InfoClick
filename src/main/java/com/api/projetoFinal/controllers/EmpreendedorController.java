@@ -58,7 +58,6 @@ public class EmpreendedorController {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_EMPREENDEDOR')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<EmpreendedorDTO> updateEmpreendedor(@PathVariable Integer id,
 			@RequestBody EmpreendedorDTO objDto) {

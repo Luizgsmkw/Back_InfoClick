@@ -39,6 +39,12 @@ public class ConsumidorController {
 		return ResponseEntity.ok().body(new ConsumidorDTO(obj));
 	}
 
+	@GetMapping(value = "/email/{email}")
+	public ResponseEntity<Integer> findIdByEmail(@PathVariable String email) {
+		Integer obj = this.service.findIdByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+
 	@GetMapping
 	public ResponseEntity<List<ConsumidorDTO>> findAllConsumidor() {
 		List<Consumidor> list = service.findAllConsumidor();
@@ -54,7 +60,6 @@ public class ConsumidorController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CONSUMIDOR')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ConsumidorDTO> updateConsumidor(@PathVariable Integer id, @RequestBody ConsumidorDTO objDto) {
 		Consumidor obj = service.update(id, objDto);

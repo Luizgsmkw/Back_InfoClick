@@ -43,6 +43,7 @@ public class EmpreendedorService {
 
 	public Empreendedor update(Integer id, EmpreendedorDTO objDto) {
 		objDto.setId(id);
+		objDto.setPassword(encoder.encode(objDto.getPassword()));
 		Empreendedor oldObj = findById(id);
 		validaEmailECnpj(objDto);
 		oldObj = new Empreendedor(objDto);

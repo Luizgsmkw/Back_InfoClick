@@ -3,7 +3,6 @@ package com.api.projetoFinal.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.api.projetoFinal.repositories.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,9 +25,10 @@ public class EmpreendedorService {
 		return obj.orElse(null);
 	}
 
-	public Integer findIdByEmail(String email){
+	public Integer findIdByEmail(String email) {
 		return repository.findIdByEmail(email);
 	}
+
 	public List<Empreendedor> findAll() {
 		return repository.findAll();
 	}
@@ -66,5 +66,9 @@ public class EmpreendedorService {
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("CNPJ já cadastrado!");
 		}
+	}
+
+	public List<Empreendedor> relatorioEmpreendedoresMes(Integer mes) {
+		return repository.empreendedorPorMes(mes);
 	}
 }

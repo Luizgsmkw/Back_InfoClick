@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,8 +23,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.dtos.EmpreendedorDTO;
 import com.api.projetoFinal.services.EmpreendedorService;
-
-import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -42,6 +42,7 @@ public class EmpreendedorController {
 		Integer obj = this.service.findIdByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
+
 	@GetMapping
 	public ResponseEntity<List<EmpreendedorDTO>> findAll() {
 		List<Empreendedor> list = service.findAll();
@@ -49,11 +50,18 @@ public class EmpreendedorController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
+	@GetMapping(value = "/mes/{mes}")
+	public ResponseEntity<List<EmpreendedorDTO>> relatorioEmpreendedoresMes(@PathVariable Integer mes) {
+		List<Empreendedor> list = service.relatorioEmpreendedoresMes(mes);
+		List<EmpreendedorDTO> listDto = list.stream().map(obj -> new EmpreendedorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+
 	@PostMapping
 	public ResponseEntity<EmpreendedorDTO> create(@Valid @RequestBody EmpreendedorDTO objDTO) {
 		Empreendedor newObj = service.create(objDTO);
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id")
-				.buildAndExpand(newObj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id").buildAndExpand(newObj.getId())
+				.toUri();
 		return ResponseEntity.created(uri).build();
 
 	}

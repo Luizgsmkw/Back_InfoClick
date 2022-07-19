@@ -24,11 +24,10 @@ import com.api.projetoFinal.services.LojaService;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
-@RequestMapping(value = "/service/Lojas")
+@RequestMapping(value = "/service/lojas")
 public class LojaController {
 	@Autowired
 	private LojaService service;
-
 
 	@GetMapping(value = "find/{id}")
 	public ResponseEntity<LojaDTO> findById(@PathVariable Integer id) {
@@ -36,7 +35,6 @@ public class LojaController {
 		return ResponseEntity.ok().body(new LojaDTO(obj));
 	}
 
-	
 	@GetMapping
 	public ResponseEntity<List<LojaDTO>> findAll() {
 		List<Loja> list = service.findAllLojas();
@@ -44,13 +42,19 @@ public class LojaController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
+	@GetMapping(value = "/{email}")
+	public ResponseEntity<Integer> findLojaByEmail(@PathVariable String email) {
+		Integer obj = this.service.findLojaByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+
 	@PostMapping("/{idEmpreendedor}")
-    public ResponseEntity<LojaDTO> create(@PathVariable Integer idEmpreendedor, @RequestBody LojaDTO objDTO) {
-        Loja newObj = service.create(objDTO, idEmpreendedor);
-        URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id").buildAndExpand(newObj.getIdLoja())
-                .toUri();
-        return ResponseEntity.created(uri).build();
-    }
+	public ResponseEntity<LojaDTO> create(@PathVariable Integer idEmpreendedor, @RequestBody LojaDTO objDTO) {
+		Loja newObj = service.create(objDTO, idEmpreendedor);
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/id").buildAndExpand(newObj.getIdLoja())
+				.toUri();
+		return ResponseEntity.created(uri).build();
+	}
 
 	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")

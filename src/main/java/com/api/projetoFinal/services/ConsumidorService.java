@@ -64,4 +64,8 @@ public class ConsumidorService {
 			throw new DataIntegrityViolationException("CPF já cadastrado!");
 		}
 	}
+
+	public Integer findIdByEmail(String email){
+		return repository.findIdByEmail(email);
+	}
 }

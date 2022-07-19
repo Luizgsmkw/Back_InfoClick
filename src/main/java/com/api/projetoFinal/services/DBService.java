@@ -11,6 +11,7 @@ import com.api.projetoFinal.domain.Empreendedor;
 import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
+import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.domain.enums.Status;
 import com.api.projetoFinal.repositories.ConsumidorRepository;
@@ -37,8 +38,10 @@ public class DBService {
 	private BCryptPasswordEncoder encoder;
 
 	public void instanciaDB() {
+		
 		Consumidor c1 = new Consumidor(null, "Gabriel", "gabriel@gmail.com", encoder.encode("123456"),"21992934144" , "2271140",
-				"Rio de Janeiro", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "193.019.997-06");
+				"Rio de Janeiro", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "193.019.997-06");		
+		c1.addPerfil(Perfil.ADMIN);
 		Consumidor c2 = new Consumidor(null, "Mingau", "382.670.620-09", "mingau@gmail.com", encoder.encode("123456"), "10881823033",
 				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "382.670.620-09");
 

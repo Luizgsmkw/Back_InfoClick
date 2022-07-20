@@ -2,22 +2,16 @@ package com.api.projetoFinal.services;
 
 import java.util.Arrays;
 
+import com.api.projetoFinal.domain.*;
+import com.api.projetoFinal.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.api.projetoFinal.domain.Consumidor;
-import com.api.projetoFinal.domain.Empreendedor;
-import com.api.projetoFinal.domain.Loja;
-import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Perfil;
 import com.api.projetoFinal.domain.enums.Ramo;
 import com.api.projetoFinal.domain.enums.Status;
-import com.api.projetoFinal.repositories.ConsumidorRepository;
-import com.api.projetoFinal.repositories.EmpreendedorRepository;
-import com.api.projetoFinal.repositories.LojaRepository;
-import com.api.projetoFinal.repositories.ProdutoRepository;
 
 @Service
 public class DBService {
@@ -35,13 +29,16 @@ public class DBService {
 	private ProdutoRepository produtoRepository;
 
 	@Autowired
+	private AdminRepository adminRepository;
+
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	public void instanciaDB() {
-		
+		Admin a1 = new Admin(null, "Palloma Gulliver", "gulliver.palloma@gmail.com", encoder.encode("123456"), "11983411107", "null","null","null","null","null","null");
+
 		Consumidor c1 = new Consumidor(null, "Gabriel", "gabriel@gmail.com", encoder.encode("123456"),"21992934144" , "2271140",
-				"Rio de Janeiro", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "193.019.997-06");		
-		c1.addPerfil(Perfil.ADMIN);
+				"Rio de Janeiro", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo", "193.019.997-06");
 		Consumidor c2 = new Consumidor(null, "Mingau", "mingau@gmail.com", encoder.encode("123456"), "10881823033",
 				"2271140", "Rio de Janeiro", "Rio de Janeiro", "Curicica", "Segredo","segredo", "382.670.620-09");
 
@@ -66,6 +63,7 @@ public class DBService {
 		Produto p3 = new Produto(null, "Fone de Ouvido ", 105.99, "A melhor opção", Categoria.SOFTWARE, 1001, Status.ATIVO, "https://images-americanas.b2w.io/produtos/3361886476/imagens/headset-fone-ouvido-gamer-rgb-usb-p3-ps4-pc-celular/3361886492_1_large.jpg",
 				159.99, null, null, l2);
 
+		adminRepository.saveAll(Arrays.asList(a1));
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));
 		empreendedorRepository.saveAll(Arrays.asList(e1, e2, e3));
 		lojarepository.saveAll(Arrays.asList(l1,l2));

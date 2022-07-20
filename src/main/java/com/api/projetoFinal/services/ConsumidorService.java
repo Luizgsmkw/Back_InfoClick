@@ -68,4 +68,8 @@ public class ConsumidorService {
 	public Integer findIdByEmail(String email){
 		return repository.findIdByEmail(email);
 	}
+	
+	public List<Consumidor> relatorioConsumidoresMes(Integer mes) {
+		return repository.consumidorPorMes(mes);
+	}
 }

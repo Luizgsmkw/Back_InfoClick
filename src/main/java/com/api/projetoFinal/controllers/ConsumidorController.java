@@ -44,6 +44,13 @@ public class ConsumidorController {
 		Integer obj = this.service.findIdByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@GetMapping(value = "/mes/{mes}")
+	public ResponseEntity<List<ConsumidorDTO>> relatorioConsumidoresMes(@PathVariable Integer mes) {
+		List<Consumidor> list = service.relatorioConsumidoresMes(mes);
+		List<ConsumidorDTO> listDto = list.stream().map(obj -> new ConsumidorDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
 
 	@GetMapping
 	public ResponseEntity<List<ConsumidorDTO>> findAllConsumidor() {

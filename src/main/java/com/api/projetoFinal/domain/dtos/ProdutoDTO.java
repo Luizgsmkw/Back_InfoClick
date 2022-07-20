@@ -37,7 +37,7 @@ public class ProdutoDTO extends Produto {
 		super();
 		this.id = obj.getId();
 		this.name = obj.getName();
-		this.produtoValor = obj.getProdutoDesconto();
+		this.produtoValor = obj.getProdutoValor();
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();

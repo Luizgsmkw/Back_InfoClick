@@ -12,5 +12,8 @@ public interface LojaRepository extends JpaRepository<Loja, Integer> {
 	Optional<Loja> findById(Integer id);
 
 	@Query(value = "SELECT l.idLoja FROM Loja l INNER JOIN Pessoa p ON l.empreendedor = p.id AND p.email = ?1")
-	Integer findLojaByEmail(String email);
+	Integer findLojaIDByEmail(String email);
+
+	@Query(value = "SELECT l FROM Loja l INNER JOIN Pessoa p ON l.empreendedor = p.id AND p.email = ?1")
+	Optional<Loja> findLojaByEmail(String email);
 }

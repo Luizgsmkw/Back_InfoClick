@@ -29,8 +29,13 @@ public class LojaService {
 		return repository.findAll();
 	}
 
-	public Integer findLojaByEmail(String email) {
-		return repository.findLojaByEmail(email);
+	public Integer findLojaIDByEmail(String email) {
+		return repository.findLojaIDByEmail(email);
+	}
+
+	public Loja findLojaByEmail(String email) {
+		Optional<Loja> obj = repository.findLojaByEmail(email);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não foi encontrado: " + email));
 	}
 
 	public Loja create(LojaDTO objDto, Integer idEmpreendedor) {

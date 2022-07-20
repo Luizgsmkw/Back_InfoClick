@@ -42,10 +42,16 @@ public class LojaController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
-	@GetMapping(value = "/{email}")
-	public ResponseEntity<Integer> findLojaByEmail(@PathVariable String email) {
-		Integer obj = this.service.findLojaByEmail(email);
+	@GetMapping(value = "findLojaID/{email}")
+	public ResponseEntity<Integer> findLojaIDByEmail(@PathVariable String email) {
+		Integer obj = this.service.findLojaIDByEmail(email);
 		return ResponseEntity.ok().body(obj);
+	}
+
+	@GetMapping(value = "/{email}")
+	public ResponseEntity<LojaDTO> findLojaByEmail(@PathVariable String email) {
+		Loja obj = this.service.findLojaByEmail(email);
+		return ResponseEntity.ok().body(new LojaDTO(obj));
 	}
 
 	@PostMapping("/{idEmpreendedor}")

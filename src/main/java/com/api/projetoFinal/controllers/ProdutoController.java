@@ -61,6 +61,7 @@ public class ProdutoController {
         return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PostMapping(value = "/{id_loja}")
 	public ResponseEntity<ProdutoDTO> createProduto(@Valid @PathVariable Integer id_loja, @RequestBody ProdutoDTO objDto) {
 		Produto newObj = service.create(objDto, id_loja);
@@ -91,6 +92,7 @@ public class ProdutoController {
         return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
     }
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/buscames/{mes}")
 	public ResponseEntity<List<ProdutoDTO>> relatorioProdutosMes(@PathVariable Integer mes) {
 		List<Produto> list = service.relatorioProdutosMes(mes);

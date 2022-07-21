@@ -52,16 +52,16 @@ public class DBService {
 				"1155");
 
 
-		Loja l1 = new Loja(null, "Preto", "SHOPTIME", "Venda de Harware e software", e3,"teste");
-		Loja l2 = new Loja(null, "Preto", "AMERICANAS", "Venda de Harware e software", e1, "teste");
-		Produto p1 = new Produto(null, "Monitor Concórdia Gamer Curvo C32f 32\" 165hz 1ms Led Full Hd", 5.0, "O pior monitor do mundo", Categoria.HARDWARE, 1001, Status.ATIVO, "https://images.tcdn.com.br/img/img_prod/740836/monitor_concordia_gamer_curvo_c32f_32_165hz_1ms_led_full_hd_6769_1_1ee122e070f295e4eb70529e293463a7.png",
-				999.99, null, null, l1);
+		Loja l1 = new Loja(null, "#191970", "SHOPTIME", "Venda de Harware e software", e3,"teste");
+		Loja l2 = new Loja(null, "#000080", "AMERICANAS", "Venda de Harware e software", e1, "teste");
+		Produto p1 = new Produto(null, "Monitor Concórdia Gamer Curvo C32f 32\" 165hz 1ms Led Full Hd", 125.00, "O pior monitor do mundo", Categoria.HARDWARE, 1001, Status.ATIVO, "https://images.tcdn.com.br/img/img_prod/740836/monitor_concordia_gamer_curvo_c32f_32_165hz_1ms_led_full_hd_6769_1_1ee122e070f295e4eb70529e293463a7.png",
+				15.0, null, null, l1);
 
 		Produto p2 = new Produto(null, "Mouse Gamer Redragon - Design e performance", 105.99, "As melhores opções de Custo x Benefício: design, performance e recursos pra quem quer detonar nos Games - a Redragon tem a opção certa para você.", Categoria.HARDWARE, 1001, Status.ATIVO, "https://static.wixstatic.com/media/71a6c2_373a28191d2243aba00ef9e50c896d5d~mv2.png/v1/crop/x_0,y_246,w_1000,h_507/fill/w_960,h_480,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/71a6c2_373a28191d2243aba00ef9e50c896d5d~mv2.png",
-				59.99, null, null, l1);
+				50.0, null, null, l1);
 
 		Produto p3 = new Produto(null, "Fone de Ouvido ", 105.99, "A melhor opção", Categoria.SOFTWARE, 1001, Status.ATIVO, "https://images-americanas.b2w.io/produtos/3361886476/imagens/headset-fone-ouvido-gamer-rgb-usb-p3-ps4-pc-celular/3361886492_1_large.jpg",
-				159.99, null, null, l2);
+				50.0, null, null, l2);
 
 		adminRepository.saveAll(Arrays.asList(a1));
 		consumidorRepository.saveAll(Arrays.asList(c1, c2));

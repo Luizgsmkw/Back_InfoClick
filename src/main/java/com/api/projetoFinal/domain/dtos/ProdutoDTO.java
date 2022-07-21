@@ -69,7 +69,11 @@ public class ProdutoDTO extends Produto {
 	}
 
 	public Double getProdutoValor() {
-		return produtoValor;
+		if(produtoDesconto >= 1){
+			return  (produtoValor - (produtoValor * produtoDesconto / 100));
+		}else{
+			return produtoValor;
+		}
 	}
 
 	public void setProdutoValor(Double produtoValor) {

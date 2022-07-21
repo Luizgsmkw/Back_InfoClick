@@ -70,9 +70,9 @@ public class ProdutoController {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProdutoDTO> updateProduto(@PathVariable Integer id, @RequestBody ProdutoDTO objDto) {
-		Produto obj = service.update(id, objDto);
+	@PutMapping(value = "/{idProduto}")
+	public ResponseEntity<ProdutoDTO> updateProduto(@PathVariable Integer idProduto, @RequestBody ProdutoDTO objDto) {
+		Produto obj = service.update(idProduto, objDto);
 		return ResponseEntity.ok().body(new ProdutoDTO(obj));
 	}
 

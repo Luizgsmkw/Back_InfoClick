@@ -39,7 +39,7 @@ public class LojaService {
 	}
 
 	public Loja create(LojaDTO objDto, Integer idEmpreendedor) {
-		objDto.setIdLoja(null);
+		objDto.setIdLoja(idEmpreendedor);
 		Optional<Empreendedor> obj = empRepository.findById(idEmpreendedor);
 		objDto.setEmpreendedor(obj.get());
 
@@ -48,14 +48,16 @@ public class LojaService {
 	}
 
 	public Loja update(Integer id, LojaDTO objDto) {
-		objDto.setIdLoja(id);
+
 		Loja oldObj = findById(id);
-		oldObj = new Loja(objDto);
-		return repository.save(oldObj);
+
+		objDto.setIdLoja(oldObj.getIdLoja());
+		objDto.setEmpreendedor(oldObj.getEmpreendedor());
+
+		return repository.save(new Loja(objDto));
 	}
 
 	public void delete(Integer id) {
-		Loja obj = findById(id);
 		repository.deleteById(id);
 	}
 

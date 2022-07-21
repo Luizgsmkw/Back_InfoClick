@@ -64,9 +64,9 @@ public class LojaController {
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<LojaDTO> updateLoja(@PathVariable Integer id, @RequestBody LojaDTO objDto) {
-		Loja obj = service.update(id, objDto);
+	@PutMapping(value = "/{idLoja}")
+	public ResponseEntity<LojaDTO> updateLoja(@PathVariable Integer idLoja, @RequestBody LojaDTO objDto) {
+		Loja obj = service.update(idLoja, objDto);
 		return ResponseEntity.ok().body(new LojaDTO(obj));
 	}
 

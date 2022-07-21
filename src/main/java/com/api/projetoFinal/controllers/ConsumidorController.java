@@ -33,18 +33,21 @@ public class ConsumidorController {
 	@Autowired
 	private ConsumidorService service;
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ConsumidorDTO> findById(@PathVariable Integer id) {
 		Consumidor obj = service.findById(id);
 		return ResponseEntity.ok().body(new ConsumidorDTO(obj));
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/email/{email}")
 	public ResponseEntity<Integer> findIdByEmail(@PathVariable String email) {
 		Integer obj = this.service.findIdByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/mes/{mes}")
 	public ResponseEntity<List<ConsumidorDTO>> relatorioConsumidoresMes(@PathVariable Integer mes) {
 		List<Consumidor> list = service.relatorioConsumidoresMes(mes);
@@ -52,6 +55,7 @@ public class ConsumidorController {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<ConsumidorDTO>> findAllConsumidor() {
 		List<Consumidor> list = service.findAllConsumidor();
@@ -73,7 +77,6 @@ public class ConsumidorController {
 		return ResponseEntity.ok().body(new ConsumidorDTO(obj));
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CONSUMIDOR')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ConsumidorDTO> delete(@PathVariable Integer id) {
 		service.delete(id);

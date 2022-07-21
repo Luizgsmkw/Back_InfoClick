@@ -50,6 +50,7 @@ public class EmpreendedorController {
 		return ResponseEntity.ok().body(listDTO);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping(value = "/mes/{mes}")
 	public ResponseEntity<List<EmpreendedorDTO>> relatorioEmpreendedoresMes(@PathVariable Integer mes) {
 		List<Empreendedor> list = service.relatorioEmpreendedoresMes(mes);
@@ -57,6 +58,7 @@ public class EmpreendedorController {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<EmpreendedorDTO> create(@Valid @RequestBody EmpreendedorDTO objDTO) {
 		Empreendedor newObj = service.create(objDTO);
@@ -66,6 +68,7 @@ public class EmpreendedorController {
 
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<EmpreendedorDTO> updateEmpreendedor(@PathVariable Integer id,
 			@RequestBody EmpreendedorDTO objDto) {

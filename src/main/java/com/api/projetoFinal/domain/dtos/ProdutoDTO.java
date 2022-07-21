@@ -1,6 +1,7 @@
 package com.api.projetoFinal.domain.dtos;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +26,7 @@ public class ProdutoDTO extends Produto {
 	protected Status status;
 	protected String produtoImagem;
 	protected Double produtoDesconto;
-	protected Date dataCriacao;
+	protected LocalDate dataCriacao;
 	protected Date ultimaAtualizacao;
 
 	protected Loja loja;
@@ -44,14 +45,16 @@ public class ProdutoDTO extends Produto {
 		this.status = obj.getStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
-		this.dataCriacao = obj.getDataCriacao();
 		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
+		this.dataCriacao = obj.getDataCriacao();
 		this.loja = obj.getLoja();
 	}
 	public Loja getLoja() {
 		return loja;
 	}
-
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -128,11 +131,11 @@ public class ProdutoDTO extends Produto {
 		this.produtoDesconto = produtoDesconto;
 	}
 
-	public Date getDataCriacao() {
+	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 

@@ -1,6 +1,7 @@
 package com.api.projetoFinal.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,7 +55,7 @@ public class Produto {
 
 	@Column(name = "dataCriacao")
 	@CreationTimestamp
-	private Date dataCriacao;
+	private LocalDate dataCriacao  = LocalDate.now();;
 
 	@Column(name = "ultimaAtualizacao")
 	@UpdateTimestamp
@@ -80,12 +81,12 @@ public class Produto {
 		this.status = obj.getStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
+		this.dataCriacao = obj.getDataCriacao();
 		this.loja = obj.getLoja();
 	}
 
 	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
-			Integer produtoEstoque, Status status, String produtoImagem, Double produtoDesconto, Date dataCriacao,
-			Date ultimaAtualizacao, Loja idLoja) {
+			Integer produtoEstoque, Status status, String produtoImagem, Double produtoDesconto, Date ultimaAtualizacao, Loja loja) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -96,9 +97,8 @@ public class Produto {
 		this.status = status;
 		this.produtoImagem = produtoImagem;
 		this.produtoDesconto = produtoDesconto;
-		this.dataCriacao = dataCriacao;
 		this.ultimaAtualizacao = ultimaAtualizacao;
-		this.loja = idLoja;
+		this.loja = loja;
 	}
 	public Loja getLoja() {
 		return loja;
@@ -180,11 +180,11 @@ public class Produto {
 		this.produtoDesconto = produtoDesconto;
 	}
 
-	public Date getDataCriacao() {
+	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 

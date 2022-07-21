@@ -17,7 +17,6 @@ public class Loja implements Serializable {
 private static final long serialVersionUID = 1L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idLoja;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 1L;
     private Empreendedor empreendedor;
 	private String imagemLoja;
 	@JsonIgnore
-	@OneToMany(mappedBy = "loja")
+	@OneToMany(mappedBy = "loja", cascade = CascadeType.ALL)
 	private List<Produto> produtos = new ArrayList<>();
 	public Loja() {
 		super();

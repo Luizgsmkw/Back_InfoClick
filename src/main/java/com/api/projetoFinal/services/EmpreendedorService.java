@@ -52,6 +52,9 @@ public class EmpreendedorService {
 
 	public void delete(Integer id) {
 		Empreendedor obj = findById(id);
+		if(obj.getLoja() != null){
+			throw new DataIntegrityViolationException("Não é possível excluir pois você possui uma loja");
+		}
 		repository.deleteById(id);
 
 	}

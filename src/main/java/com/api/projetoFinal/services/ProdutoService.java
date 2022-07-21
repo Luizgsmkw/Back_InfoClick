@@ -40,10 +40,13 @@ public class ProdutoService {
 	}
 
 	public Produto update(Integer id, ProdutoDTO objDto) {
-		objDto.setId(id);
 		Produto oldObj = findById(id);
-		oldObj = new Produto(objDto);
-		return repository.save(oldObj);
+
+		objDto.setId(oldObj.getId());
+		objDto.setLoja(oldObj.getLoja());
+		objDto.setDataCriacao(oldObj.getDataCriacao());
+
+		return repository.save(new Produto(objDto));
 	}
 
 	public List<Produto> relatorioProdutosMes(Integer mes) {

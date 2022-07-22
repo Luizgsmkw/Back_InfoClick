@@ -58,7 +58,6 @@ public class EmpreendedorController {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<EmpreendedorDTO> create(@Valid @RequestBody EmpreendedorDTO objDTO) {
 		Empreendedor newObj = service.create(objDTO);

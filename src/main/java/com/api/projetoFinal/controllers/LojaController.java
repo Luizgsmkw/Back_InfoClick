@@ -54,7 +54,6 @@ public class LojaController {
 		return ResponseEntity.ok().body(new LojaDTO(obj));
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PostMapping("/{idEmpreendedor}")
 	public ResponseEntity<LojaDTO> create(@PathVariable Integer idEmpreendedor, @RequestBody LojaDTO objDTO) {
 		Loja newObj = service.create(objDTO, idEmpreendedor);

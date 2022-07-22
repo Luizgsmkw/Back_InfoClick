@@ -129,7 +129,12 @@ public class Produto {
 	}
 
 	public Double getProdutoValor() {
-		return produtoValor;
+		if(produtoDesconto >= 1) {
+			Double desconto = (produtoDesconto / 100) * produtoValor;
+			return  produtoValor - desconto;
+		}else{
+			return produtoValor;
+		}
 	}
 
 	public void setProdutoValor(Double produtoValor) {
@@ -137,8 +142,9 @@ public class Produto {
 	}
 
 	public Double getProdutoAntigoValor() {
-		return produtoValor;
+		return ((produtoValor - produtoValor * (produtoDesconto / 100)) / (1 - produtoDesconto / 100));
 	}
+
 
 	public void setProdutoAntigoValor(Double produtoAntigoValor) {
 		this.produtoAntigoValor = produtoAntigoValor;

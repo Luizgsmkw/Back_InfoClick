@@ -75,11 +75,7 @@ public class ProdutoDTO extends Produto {
 	}
 
 	public Double getProdutoValor() {
-		if(produtoDesconto >= 1){
-			return  produtoValor - produtoValor * (produtoDesconto / 100);
-		}else{
-			return produtoValor;
-		}
+		return produtoValor;
 	}
 
 	public void setProdutoValor(Double produtoValor) {
@@ -88,7 +84,7 @@ public class ProdutoDTO extends Produto {
 
 
 	public Double getProdutoAntigoValor() {
-		return ((produtoValor - produtoValor * (produtoDesconto / 100)) / (1 - (produtoDesconto / 100)));
+		return produtoAntigoValor;
 	}
 
 	public void setProdutoAntigoValor(Double produtoAntigoValor) {

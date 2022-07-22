@@ -19,6 +19,8 @@ public class ProdutoDTO extends Produto {
 	protected String name;
 	@NotNull(message = "O valor do produto não poderá ser nulo")
 	protected Double produtoValor;
+
+	protected Double produtoAntigoValor;
 	@NotNull(message = "A descrição do produto não poderá ser nulo")
 	protected String produtoDescricao;
 	protected Categoria categoria;
@@ -39,6 +41,7 @@ public class ProdutoDTO extends Produto {
 		this.id = obj.getId();
 		this.name = obj.getName();
 		this.produtoValor = obj.getProdutoValor();
+		this.produtoAntigoValor = obj.getProdutoAntigoValor();
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
@@ -73,7 +76,7 @@ public class ProdutoDTO extends Produto {
 
 	public Double getProdutoValor() {
 		if(produtoDesconto >= 1){
-			return  (produtoValor - (produtoValor * produtoDesconto / 100));
+			return  produtoValor - produtoValor * (produtoDesconto / 100);
 		}else{
 			return produtoValor;
 		}
@@ -81,6 +84,15 @@ public class ProdutoDTO extends Produto {
 
 	public void setProdutoValor(Double produtoValor) {
 		this.produtoValor = produtoValor;
+	}
+
+
+	public Double getProdutoAntigoValor() {
+		return ((produtoValor - produtoValor * (produtoDesconto / 100)) / (1 - (produtoDesconto / 100)));
+	}
+
+	public void setProdutoAntigoValor(Double produtoAntigoValor) {
+		this.produtoAntigoValor = produtoAntigoValor;
 	}
 
 	public String getProdutoDescricao() {

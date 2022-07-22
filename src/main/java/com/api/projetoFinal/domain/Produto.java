@@ -35,6 +35,9 @@ public class Produto {
 	@Column(name = "produtoValor")
 	private Double produtoValor;
 
+	@Column(name = "produtoAntigoValor")
+	private Double produtoAntigoValor;
+
 	@Column(name = "produtoDescricao")
 	private String produtoDescricao;
 
@@ -75,6 +78,7 @@ public class Produto {
 		this.id = obj.getId();
 		this.name = obj.getName();
 		this.produtoValor = obj.getProdutoValor();
+		this.produtoAntigoValor = obj.getProdutoAntigoValor();
 		this.produtoDescricao = obj.getProdutoDescricao();
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
@@ -130,6 +134,14 @@ public class Produto {
 
 	public void setProdutoValor(Double produtoValor) {
 		this.produtoValor = produtoValor;
+	}
+
+	public Double getProdutoAntigoValor() {
+		return produtoValor;
+	}
+
+	public void setProdutoAntigoValor(Double produtoAntigoValor) {
+		this.produtoAntigoValor = produtoAntigoValor;
 	}
 
 	public String getProdutoDescricao() {

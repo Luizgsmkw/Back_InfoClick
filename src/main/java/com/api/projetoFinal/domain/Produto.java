@@ -1,6 +1,8 @@
 package com.api.projetoFinal.domain;
 
-import java.sql.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -12,13 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.api.projetoFinal.domain.enums.Promocao;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.api.projetoFinal.domain.dtos.ProdutoDTO;
 import com.api.projetoFinal.domain.enums.Categoria;
 import com.api.projetoFinal.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "produtos")
@@ -50,6 +53,9 @@ public class Produto {
 	@Column(name = "produtoStatus")
 	private Status status;
 
+	@Column(name = "promocaoStatus")
+	private Promocao promocaoStatus;
+
 	@Column(name = "produtoImagem")
 	private String produtoImagem;
 
@@ -60,9 +66,9 @@ public class Produto {
 	@CreationTimestamp
 	private LocalDate dataCriacao  = LocalDate.now();;
 
-	@Column(name = "ultimaAtualizacao")
-	@UpdateTimestamp
-	private Date ultimaAtualizacao;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column (columnDefinition = "Date", nullable = true)
+	private Date dataLimitePromocao;
 
 	@JsonIgnore
 	@ManyToOne
@@ -83,14 +89,16 @@ public class Produto {
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
 		this.status = obj.getStatus();
+		this.promocaoStatus = obj.getPromocaoStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
 		this.dataCriacao = obj.getDataCriacao();
+		this.dataLimitePromocao = obj.getDataLimitePromocao();
 		this.loja = obj.getLoja();
 	}
 
 	public Produto(Integer id, String name, Double produtoValor, String produtoDescricao, Categoria categoria,
-			Integer produtoEstoque, Status status, String produtoImagem, Double produtoDesconto, Date ultimaAtualizacao, Loja loja) {
+			Integer produtoEstoque, Status status, Promocao promocaoStatus, String produtoImagem, Double produtoDesconto, Date dataLimitePromocao, Loja loja) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -99,9 +107,10 @@ public class Produto {
 		this.categoria = categoria;
 		this.produtoEstoque = produtoEstoque;
 		this.status = status;
+		this.promocaoStatus = promocaoStatus;
 		this.produtoImagem = produtoImagem;
 		this.produtoDesconto = produtoDesconto;
-		this.ultimaAtualizacao = ultimaAtualizacao;
+		this.dataLimitePromocao = dataLimitePromocao;
 		this.loja = loja;
 	}
 	public Loja getLoja() {
@@ -129,7 +138,12 @@ public class Produto {
 	}
 
 	public Double getProdutoValor() {
-		if(produtoDesconto >= 1) {
+
+		LocalDate dataLimitePromo = dataLimitePromocao.toInstant().atZone(ZoneId.of("America/Sao_Paulo")).toLocalDate();
+		LocalDate dataAtual = LocalDate.now();
+		boolean verificadorDePromocao = dataAtual.isBefore(dataLimitePromo);
+
+		if(verificadorDePromocao && promocaoStatus == Promocao.ATIVADA) {
 			Double desconto = (produtoDesconto / 100) * produtoValor;
 			return  produtoValor - desconto;
 		}else{
@@ -144,7 +158,6 @@ public class Produto {
 	public Double getProdutoAntigoValor() {
 		return ((produtoValor - produtoValor * (produtoDesconto / 100)) / (1 - produtoDesconto / 100));
 	}
-
 
 	public void setProdutoAntigoValor(Double produtoAntigoValor) {
 		this.produtoAntigoValor = produtoAntigoValor;
@@ -182,6 +195,24 @@ public class Produto {
 		this.status = status;
 	}
 
+	public Promocao getPromocaoStatus() {
+
+		LocalDate dataLimitePromo = dataLimitePromocao.toInstant().atZone(ZoneId.of("America/Sao_Paulo")).toLocalDateTime().toLocalDate();
+		LocalDate dataAtual = LocalDate.now();
+
+		boolean verificadorDePromocao = dataAtual.isEqual(dataLimitePromo);
+
+		if(verificadorDePromocao && promocaoStatus == Promocao.ATIVADA) {
+			return Promocao.DESATIVADA;
+		}else{
+			return promocaoStatus;
+		}
+	}
+
+	public void setPromocaoStatus(Promocao promocaoStatus) {
+		this.promocaoStatus = promocaoStatus;
+	}
+
 	public String getProdutoImagem() {
 		return produtoImagem;
 	}
@@ -206,11 +237,11 @@ public class Produto {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public Date getUltimaAtualizacao() {
-		return ultimaAtualizacao;
+	public Date getDataLimitePromocao() {
+		return dataLimitePromocao;
 	}
 
-	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
+	public void setDataLimitePromocao(Date dataLimitePromocao) {
+		this.dataLimitePromocao = dataLimitePromocao;
 	}
 }

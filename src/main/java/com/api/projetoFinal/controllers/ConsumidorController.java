@@ -45,7 +45,7 @@ public class ConsumidorController {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_CONSUMIDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/mes/{mes}")
 	public ResponseEntity<List<ConsumidorDTO>> relatorioConsumidoresMes(@PathVariable Integer mes) {
 		List<Consumidor> list = service.relatorioConsumidoresMes(mes);
@@ -68,14 +68,14 @@ public class ConsumidorController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_CONSUMIDOR', 'ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ConsumidorDTO> updateConsumidor(@PathVariable Integer id, @RequestBody ConsumidorDTO objDto) {
 		Consumidor obj = service.update(id, objDto);
 		return ResponseEntity.ok().body(new ConsumidorDTO(obj));
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_CONSUMIDOR', 'ROLE_ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ConsumidorDTO> delete(@PathVariable Integer id) {
 		service.delete(id);

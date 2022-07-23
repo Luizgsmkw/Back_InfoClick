@@ -1,6 +1,6 @@
 package com.api.projetoFinal.domain.dtos;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.api.projetoFinal.domain.Loja;
 import com.api.projetoFinal.domain.Produto;
 import com.api.projetoFinal.domain.enums.Categoria;
+import com.api.projetoFinal.domain.enums.Promocao;
 import com.api.projetoFinal.domain.enums.Status;
 
 public class ProdutoDTO extends Produto {
@@ -26,10 +27,12 @@ public class ProdutoDTO extends Produto {
 	protected Categoria categoria;
 	protected Integer produtoEstoque;
 	protected Status status;
+
+	protected Promocao promocaoStatus;
 	protected String produtoImagem;
 	protected Double produtoDesconto;
 	protected LocalDate dataCriacao;
-	protected Date ultimaAtualizacao;
+	protected Date dataLimitePromocao;
 
 	protected Loja loja;
 	public ProdutoDTO() {
@@ -46,9 +49,10 @@ public class ProdutoDTO extends Produto {
 		this.categoria = obj.getCategoria();
 		this.produtoEstoque = obj.getProdutoEstoque();
 		this.status = obj.getStatus();
+		this.promocaoStatus = obj.getPromocaoStatus();
 		this.produtoImagem = obj.getProdutoImagem();
 		this.produtoDesconto = obj.getProdutoDesconto();
-		this.ultimaAtualizacao = obj.getUltimaAtualizacao();
+		this.dataLimitePromocao = obj.getDataLimitePromocao();
 		this.dataCriacao = obj.getDataCriacao();
 		this.loja = obj.getLoja();
 	}
@@ -81,7 +85,6 @@ public class ProdutoDTO extends Produto {
 	public void setProdutoValor(Double produtoValor) {
 		this.produtoValor = produtoValor;
 	}
-
 
 	public Double getProdutoAntigoValor() {
 		return produtoAntigoValor;
@@ -123,6 +126,14 @@ public class ProdutoDTO extends Produto {
 		this.status = status;
 	}
 
+	public Promocao getPromocaoStatus() {
+		return promocaoStatus;
+	}
+
+	public void setPromocaoStatus(Promocao promocaoStatus) {
+		this.promocaoStatus = promocaoStatus;
+	}
+
 	public String getProdutoImagem() {
 		return produtoImagem;
 	}
@@ -147,11 +158,11 @@ public class ProdutoDTO extends Produto {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public Date getUltimaAtualizacao() {
-		return ultimaAtualizacao;
+	public Date getDataLimitePromocao() {
+		return dataLimitePromocao;
 	}
 
-	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
+	public void setDataLimitePromocao(Date dataLimitePromocao) {
+		this.dataLimitePromocao = dataLimitePromocao;
 	}
 }

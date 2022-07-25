@@ -142,8 +142,9 @@ public class Produto {
 		LocalDate dataLimitePromo = dataLimitePromocao.toInstant().atZone(ZoneId.of("America/Sao_Paulo")).toLocalDate();
 		LocalDate dataAtual = LocalDate.now();
 		boolean verificadorDePromocao = dataAtual.isBefore(dataLimitePromo);
+		boolean verificadorDePromocao2 = dataAtual.isEqual(dataLimitePromo);
 
-		if(verificadorDePromocao && promocaoStatus == Promocao.ATIVADA) {
+		if((verificadorDePromocao || verificadorDePromocao2) && promocaoStatus == Promocao.ATIVADA) {
 			Double desconto = (produtoDesconto / 100) * produtoValor;
 			return  produtoValor - desconto;
 		}else{
@@ -200,7 +201,7 @@ public class Produto {
 		LocalDate dataLimitePromo = dataLimitePromocao.toInstant().atZone(ZoneId.of("America/Sao_Paulo")).toLocalDateTime().toLocalDate();
 		LocalDate dataAtual = LocalDate.now();
 
-		boolean verificadorDePromocao = dataAtual.isEqual(dataLimitePromo);
+		boolean verificadorDePromocao = dataAtual.isAfter(dataLimitePromo);
 
 		if(verificadorDePromocao && promocaoStatus == Promocao.ATIVADA) {
 			return Promocao.DESATIVADA;

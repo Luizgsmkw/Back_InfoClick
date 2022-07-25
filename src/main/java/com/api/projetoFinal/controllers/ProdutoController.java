@@ -61,7 +61,6 @@ public class ProdutoController {
         return new ResponseEntity<List<Produto>>(produto, HttpStatus.OK);
     }
 
-
 	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
 	@PostMapping(value = "/{id_loja}")
 	public ResponseEntity<ProdutoDTO> createProduto(@Valid @PathVariable Integer id_loja, @RequestBody ProdutoDTO objDto) {
@@ -97,6 +96,14 @@ public class ProdutoController {
 	@GetMapping(value = "/buscames/{mes}")
 	public ResponseEntity<List<ProdutoDTO>> relatorioProdutosMes(@PathVariable Integer mes) {
 		List<Produto> list = service.relatorioProdutosMes(mes);
+		List<ProdutoDTO> listDto = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_EMPREENDEDOR', 'ROLE_ADMIN')")
+	@GetMapping(value = "/busca-semana/{semana}")
+	public ResponseEntity<List<ProdutoDTO>> relatorioProdutosSemana(@PathVariable Integer semana) {
+		List<Produto> list = service.relatorioProdutosSemana(semana);
 		List<ProdutoDTO> listDto = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}

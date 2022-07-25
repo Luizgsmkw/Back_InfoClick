@@ -19,4 +19,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
     @Query(value="call SPS_CRIACAO_PRODUTOS_MES(:mes)", nativeQuery = true)
     List<Produto> listarProdMes( Integer mes);
+    
+    @Query(value="CALL sps_produtos_byWeek(:semana)", nativeQuery = true)
+    List<Produto> listarProdSemana(Integer semana);
 }

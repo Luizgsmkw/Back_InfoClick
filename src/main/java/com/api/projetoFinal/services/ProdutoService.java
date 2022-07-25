@@ -52,6 +52,10 @@ public class ProdutoService {
 	public List<Produto> relatorioProdutosMes(Integer mes) {
 		return repository.listarProdMes(mes);
 	}
+	
+	public List<Produto> relatorioProdutosSemana(Integer semana) {
+		return repository.listarProdSemana(semana);
+	}
 
 	public void delete(Integer id) {
 		repository.deleteById(id);

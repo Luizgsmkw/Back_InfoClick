@@ -45,7 +45,6 @@ public class ConsumidorController {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_CONSUMIDOR', 'ROLE_ADMIN')")
 	@GetMapping(value = "/mes/{mes}")
 	public ResponseEntity<List<ConsumidorDTO>> relatorioConsumidoresMes(@PathVariable Integer mes) {
 		List<Consumidor> list = service.relatorioConsumidoresMes(mes);
